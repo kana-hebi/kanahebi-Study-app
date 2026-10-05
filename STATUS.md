@@ -4,45 +4,53 @@ Last updated: 2026-10-06
 
 ## Current phase
 
-**Phase: Product design / architecture definition**
+**Phase: Product design / generalized architecture definition**
 
 The repository is the canonical storage for the project.
 No application implementation has started yet.
-The product concept and initial offline-first architecture are now defined.
+The product concept, offline-first architecture, learning-mode model, and initial Content Pack direction are now defined.
 
 ## Confirmed decisions
 
-- Target: Japanese university entrance exam organic chemistry + polymers.
+- First production content target: Japanese university entrance exam organic chemistry + polymers.
 - Coverage starts from foundational knowledge checks and extends to difficult-university entrance-exam level.
-- Two primary learning modes are mandatory:
-  - **Story Mode**: personalized/adaptive progression.
-  - **Free Mode**: learner manually selects topics, knowledge checks, exercises, difficulty, etc.
+- The application core must not be permanently hard-wired to organic chemistry.
+- Future content must be able to expand into other chemistry domains and eventually other subjects through Content Packs.
+- Two primary learning routes are mandatory:
+  - **コース学習 (Guided Course)**: personalized/adaptive progression.
+  - **自由学習 (Free Study)**: learner manually selects topics, knowledge checks, exercises, difficulty, etc.
+- Free Study is tracked by default and contributes to the shared learner model.
+- Free Study can be switched to an **untracked** session that does not modify mastery, weaknesses, review scheduling or Guided Course progression.
+- Selection-based questions must expose an explicit **「わからない」** action.
+- `unknown` is distinct from choosing a wrong distractor and should not fabricate a distractor-specific misconception.
 - Personalization is not the only learning path; manual/free study remains a first-class feature.
-- Story Mode and Free Mode share one learner model: Free Mode attempts also update mastery/weakness evidence.
 - Explanations are required, including staged hints rather than only final answers.
 - The system tracks misconception types, not just correct/incorrect results.
 - Automatic review scheduling and weakness remediation are part of the product concept.
-- Organic chemistry and polymers are both in scope.
 - **Offline-first is mandatory**: the complete core study loop must work without network access.
-- **Smartphone-only usage is mandatory**: learning must require no PC and no always-online backend.
+- **Smartphone-only usage is mandatory**: learning and Content Pack management must require no PC and no always-online backend.
 - **Extensibility is mandatory**: curriculum, question types, algorithms, content packs, and optional services must be replaceable/expandable.
 - Core learner data uses on-device storage as source of truth.
 - Content data and learner/progress data are logically separated.
+- Imported Content Packs are declarative data and must not require arbitrary JavaScript/native-code execution.
+- New subjects that use existing capabilities can be added as content only; fundamentally new interaction types require a versioned app capability.
 - Online AI, cloud sync, content download, etc. are optional layers and cannot be required for core learning.
 - Initial preferred implementation stack: React Native + Expo + TypeScript + SQLite.
+- Primary smartphone navigation direction: Home / コース学習 / 自由学習 / 復習 / その他.
 - This GitHub repository is the project's canonical storage.
 
 ## Architecture documents
 
 - Overall product concept: `README.md`
 - Detailed product behavior: `docs/PRODUCT_SPEC.md`
-- Initial technical architecture: `docs/ARCHITECTURE.md`
+- Technical architecture: `docs/ARCHITECTURE.md`
+- Initial Content Pack format: `docs/CONTENT_PACK_SPEC.md`
 
-## Current product concept
+## Current learner-model concept
 
-Story Mode estimates the learner's knowledge state from signals such as:
+Guided Course estimates the learner's knowledge state from signals such as:
 
-- correct / incorrect
+- correct / incorrect / explicit unknown
 - type of wrong answer
 - repeated confusion between concepts
 - response time
@@ -50,30 +58,31 @@ Story Mode estimates the learner's knowledge state from signals such as:
 - retention over time
 - whether a fact can be recalled alone but not applied in an integrated problem
 
-Free Mode allows direct access to:
-
-- topic / unit selection
-- knowledge checks
-- practice by problem type
-- difficulty selection
-- reaction maps
-- weak-point review
-- exam-style sets
-
-Both modes write compatible evidence into the same learner model.
+Tracked Free Study emits compatible evidence into the same learner model.
+Untracked Free Study deliberately leaves the learner model unchanged.
 
 ## Next design tasks
 
-1. Define the complete curriculum graph for organic chemistry and polymers.
-2. Define the knowledge-skill taxonomy and prerequisite graph.
-3. Define the content-pack schema and stable IDs/versioning.
-4. Define question schemas and answer evaluation rules.
-5. Define learner-model / personalization data model.
-6. Define Story Mode progression logic.
-7. Define Free Mode navigation and filtering.
+1. Define the complete organic chemistry + polymers curriculum graph.
+2. Define the generic knowledge-skill taxonomy and prerequisite graph contract.
+3. Refine Content Pack schema, stable IDs, capabilities and versioning.
+4. Define question schemas and answer evaluation rules including `unknown`.
+5. Define learner-model / evidence / personalization data model.
+6. Define Guided Course progression logic.
+7. Define Free Study navigation, filtering, tracked/untracked session UX.
 8. Define explanation / staged-hint system.
 9. Define SQLite schema and migrations from the domain models.
-10. Implement a small Stage 0 offline prototype and validate it with real usage.
+10. Decide MVP content-authoring/validation workflow.
+11. Implement a small Stage 0 offline prototype and validate it with real usage.
+12. After the first domain is stable, import a small second-domain pack to verify that the engine is genuinely subject-extensible.
+
+## Open product questions worth resolving soon
+
+- Whether third-party/user-authored Content Packs are an intended public feature or mainly a personal/developer workflow.
+- Default behavior for unsigned local Content Packs.
+- Exact UX wording/name for the untracked Free Study state.
+- Whether Guided Course prerequisites are recommendations only or can hard-lock content.
+- How much session-only result/history an untracked Free Study session should retain after exit.
 
 ## State-management rule
 
