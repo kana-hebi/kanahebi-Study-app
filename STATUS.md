@@ -6,9 +6,9 @@ Last updated: 2026-10-06 JST / 2026-10-05 UTC
 
 **First Android distribution v0.1.0 built; automated checks passed; real-device acceptance remains open.**
 
-GitHub is the canonical project storage. Implementation and documents belong to `work/offline-first-release-20261006`. At run start, `main` at `f97fae8` contained five design documents and no app code. This autonomous run produced the app, original content, validation tools and a standalone Android APK.
+GitHub `main` is the canonical project storage and now contains the implementation, content and documents. The original release run began with `main` at `f97fae8`, containing five design documents and no app code. That run produced the app, original content, validation tools and a standalone Android APK.
 
-Review is [Draft PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1). The validated implementation checkpoint is `d3fb0d0`; this status-only update records the resulting review link. APK and ZIP deliverables were saved successfully, separately from Git-backed source. Main remains at `f97fae8`.
+Integration is complete: [PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1) was merged into `main` on 2026-10-06 JST with explicit user authorization. Merge commit: `7d2e53802b7ecde342ca2792cff4c87455bbfe9e`. The validated implementation checkpoint is `d3fb0d0`. APK and ZIP deliverables remain saved separately from Git-backed source; this integration did not change or rebuild the application.
 
 This is a first usable distribution with broad introductory organic/polymer coverage. It is not a completed difficult-university preparation curriculum, a peer-reviewed chemistry textbook, or a device-tested production release. No background execution after the conversation ends is promised.
 
@@ -58,11 +58,10 @@ Evidence and limits: [docs/RELEASE_VALIDATION.md](docs/RELEASE_VALIDATION.md), [
 2. Independently review chemistry. Increase distinct question density per node and add substantially more worked structure determination, synthesis and quantitative integration. Topic coverage does not establish advanced-exam sufficiency.
 3. Evaluate the provisional learning model with real usage. Scores are not calibrated probabilities; response time is collected but not penalized. Some nodes cannot reach mastery with the current distinct-question count.
 4. Implement controlled ID retirement/migration before removing nodes in pack updates. Rich molecular/math rendering, archive assets, cloud sync and iOS distribution remain future work.
-5. Integrate PR #1 into main in this run, with the user's explicit authorization; verify the resulting main content and update this status.
 
 ## Approval boundary and next run
 
-The prior automatic approval review rejected main publication for insufficient explicit authorization. On 2026-10-06 JST, the user explicitly authorized the action and asked to retry it. This run will verify the unchanged release checkpoint, mark PR #1 ready, merge with an expected-head guard, then verify main and record completion. Application code is not changed in this integration run.
+The earlier main publication was rejected for insufficient explicit authorization. On 2026-10-06 JST, the user explicitly authorized it and requested a retry. PR #1 was marked ready and merged using the verified expected head. Post-merge comparison found no file differences from the reviewed branch head. The only changes in this integration run are status bookkeeping; the previous automated/build evidence and outstanding real-device/content gates remain as recorded above. The main-integration approval blocker is resolved.
 
 Read README, STATUS and AGENTS first. Reproduce with Node 24, Java 17, SDK/Build Tools 36, NDK 27.1.12297006 and CMake 3.22.1. Run `npm ci`, `npm run typecheck`, `npm run validate:content`, `npm test`, `npm run export:web`, then with ANDROID_HOME set, `npm run build:android` and `python scripts/inspect-apk.py`.
 
