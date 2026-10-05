@@ -4,11 +4,14 @@ Last updated: 2026-10-06
 
 ## Current phase
 
-**Phase: Product design / generalized architecture definition**
+**Phase: Autonomous first usable release — preparation and implementation**
 
 The repository is the canonical storage for the project.
-No application implementation has started yet.
-The product concept, offline-first architecture, learning-mode model, and initial Content Pack direction are now defined.
+Run start (2026-10-06 JST): remote `main` at `f97fae8` and local checkout were reconciled. The repository currently contains five design documents and no app code. No build or real-device result exists yet.
+
+The user requests autonomous work toward a usable organic/polymer release while they sleep. Routine design, implementation and repository updates are authorized. The initial target is an Android-first standalone offline app with the approved five-tab navigation, guided/free learning, tracked/untracked sessions, unknown/hints, explanations, review and app-native pack support. Broad organic/polymer teaching coverage is the target; a first usable release is not evidence of validated difficult-university-level completeness.
+
+Current task: prepare curriculum/data contracts and a reproducible Expo environment, then implement and test in milestones. See `docs/AUTONOMOUS_RUN.md` for acceptance gates and fallback decisions. Update this section at each durable checkpoint and at run end.
 
 ## Confirmed decisions
 
@@ -78,10 +81,10 @@ Untracked Free Study deliberately leaves the learner model unchanged.
 
 ## Work handoff / next run
 
-The user approved all five recommended product choices and clarified developer-mediated pack authoring. This run only prepares handoff; curriculum authoring and application implementation have not begun in this run. Pause here until the new Work conversation.
+The user approved all five recommended product choices and clarified developer-mediated pack authoring. The same conversation is now a Work run, and autonomous implementation has been requested. The previous pause-until-new-conversation instruction has been superseded.
 
 Next Work run:
-1. Read README.md, STATUS.md and all four existing design specifications; inspect the actual repository tree and reconcile it with STATUS.md before claiming implementation state.
+1. Read README.md, STATUS.md and all three existing detailed design specifications; inspect the actual repository tree and reconcile it with STATUS.md before claiming implementation state.
 2. Update this STATUS.md at run start with the current position and concrete work plan.
 3. Research curriculum coverage and practical implementation approaches using official sources and experienced practitioners; retain source provenance.
 4. Design the complete organic/polymer curriculum and prerequisite graph, plus the generic knowledge/skill contract. Capture prerequisite versus recommendation relationships without hard locks.
@@ -106,4 +109,3 @@ Detailed design belongs in dedicated specification files; do not create duplicat
 - 外部の生データ・任意形式・他人製パックをアプリへ直接投入する機能は想定しない。アプリが受け取るのは開発者が用意した対応形式のパックのみ。スマホでの専用パック追加・更新と他教科への拡張は維持する。
 - アプリ内のAI教材パッケージング、自動スクレイピング、公開第三者パック市場、汎用外部形式変換は現スコープ外。無料AIによる変換も今回実装しない。
 - 自作への変換は出典や利用条件を消すことではない。素材の出典・利用条件・改変内容を記録し、再配布可能性を確認して教材化する。
-
