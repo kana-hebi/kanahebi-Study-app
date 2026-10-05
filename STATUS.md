@@ -8,6 +8,8 @@ Last updated: 2026-10-06 JST / 2026-10-05 UTC
 
 GitHub is the canonical project storage. Implementation and documents belong to `work/offline-first-release-20261006`. At run start, `main` at `f97fae8` contained five design documents and no app code. This autonomous run produced the app, original content, validation tools and a standalone Android APK.
 
+Review is [Draft PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1). The validated implementation checkpoint is `d3fb0d0`; this status-only update records the resulting review link. APK and ZIP deliverables were saved successfully, separately from Git-backed source. Main remains at `f97fae8`.
+
 This is a first usable distribution with broad introductory organic/polymer coverage. It is not a completed difficult-university preparation curriculum, a peer-reviewed chemistry textbook, or a device-tested production release. No background execution after the conversation ends is promised.
 
 ## Implemented
