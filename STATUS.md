@@ -76,15 +76,34 @@ Untracked Free Study deliberately leaves the learner model unchanged.
 11. Implement a small Stage 0 offline prototype and validate it with real usage.
 12. After the first domain is stable, import a small second-domain pack to verify that the engine is genuinely subject-extensible.
 
-## Open product questions worth resolving soon
+## Work handoff / next run
 
-- Whether third-party/user-authored Content Packs are an intended public feature or mainly a personal/developer workflow.
-- Default behavior for unsigned local Content Packs.
-- Exact UX wording/name for the untracked Free Study state.
-- Whether Guided Course prerequisites are recommendations only or can hard-lock content.
-- How much session-only result/history an untracked Free Study session should retain after exit.
+The user approved all five recommended product choices and clarified developer-mediated pack authoring. This run only prepares handoff; curriculum authoring and application implementation have not begun in this run. Pause here until the new Work conversation.
+
+Next Work run:
+1. Read README.md, STATUS.md and all four existing design specifications; inspect the actual repository tree and reconcile it with STATUS.md before claiming implementation state.
+2. Update this STATUS.md at run start with the current position and concrete work plan.
+3. Research curriculum coverage and practical implementation approaches using official sources and experienced practitioners; retain source provenance.
+4. Design the complete organic/polymer curriculum and prerequisite graph, plus the generic knowledge/skill contract. Capture prerequisite versus recommendation relationships without hard locks.
+5. Refine app-native Content Pack, question/evidence, tracked/untracked, hints, learner model and SQLite contracts; decide routine implementation details autonomously.
+6. Build a small usable offline Stage 0 prototype rather than delaying first use for exhaustive content production. Validate the core loop and preserve a path to all organic/polymer content and later other subjects.
+7. Run meaningful checks, record untested real-device items, save results in this repository, and update STATUS.md at run end. Do not create competing checkpoint files.
+
+The user delegates repository/internal structure and routine choices to the assistant. Do not stop after each design step for approval; continue the authorized scope in the new Work run. Ask only for genuinely blocking information, and never claim builds, device tests or repository updates without evidence. Keep project details in this repository/project rather than adding broad personal memories.
 
 ## State-management rule
 
 `STATUS.md` is the single canonical file for the current project position.
 Detailed design belongs in dedicated specification files; do not create duplicate checkpoint/status documents unless the role is clearly different.
+
+## Confirmed decisions — 2026-10-06 handoff
+
+- コース学習は原則ロックなし。前提不足は推奨として提示し、本人が望めば先へ進める。
+- 自由学習は記録ONが既定。OFFでは採点・解説・一時集計を利用できるが、終了後に解答履歴・習熟度・弱点・復習予定・コース進捗を残さない。ブックマークなど成績と無関係な明示操作は保存する。
+- 「わからない」の後は「ヒントを見る」「答えと解説を見る」に分岐する。最初の想起失敗とヒント後の成功を別の証拠として扱い、無補助の正解に上書きしない。
+- 既習範囲は3〜5問程度の理解度チェックでスキップできる。自己申告だけで習得済みにしない。通過を恒久的習得の証明とは扱わず、以後の証拠で更新する。
+- 教材は開発者であるアシスタントがアプリ専用の自作Content Packへ整える。ネット上の問題・資料やユーザー提供素材を分析し、解答、詳細解説、段階ヒント、必要知識ノード、誤答分類、出典情報を付与して検証する。
+- 外部の生データ・任意形式・他人製パックをアプリへ直接投入する機能は想定しない。アプリが受け取るのは開発者が用意した対応形式のパックのみ。スマホでの専用パック追加・更新と他教科への拡張は維持する。
+- アプリ内のAI教材パッケージング、自動スクレイピング、公開第三者パック市場、汎用外部形式変換は現スコープ外。無料AIによる変換も今回実装しない。
+- 自作への変換は出典や利用条件を消すことではない。素材の出典・利用条件・改変内容を記録し、再配布可能性を確認して教材化する。
+
