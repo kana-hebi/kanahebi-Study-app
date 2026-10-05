@@ -1,0 +1,13 @@
+node_modules/
+.expo/
+dist/
+android/
+ios/
+*.jks
+*.keystore
+*.log
+local.properties
+.env*
+coverage/
+artifacts/*.apk
+artifacts/*.zip

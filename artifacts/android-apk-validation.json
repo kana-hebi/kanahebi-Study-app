@@ -1,0 +1,36 @@
+{
+  "inspectedAt": "2026-10-05T17:25:06.589188+00:00",
+  "file": "kanahebi-study-0.1.0-arm64.apk",
+  "bytes": 28435461,
+  "sha256": "6c4c730850a84f978c0807a2f5997dd17cde139dfb93db38254ddb30a92895bb",
+  "applicationId": "lab.kanahebi.study",
+  "versionName": "0.1.0",
+  "versionCode": 1,
+  "abi": "arm64-v8a",
+  "minSdk": 24,
+  "targetSdk": 36,
+  "debuggable": false,
+  "signature": "APK v2, Android Debug test certificate",
+  "allowBackup": false,
+  "blockedAndroidPermissions": [
+    "INTERNET",
+    "SYSTEM_ALERT_WINDOW",
+    "VIBRATE",
+    "READ_EXTERNAL_STORAGE",
+    "WRITE_EXTERNAL_STORAGE"
+  ],
+  "embeddedBundleBytes": 1487576,
+  "bundledNodes": 114,
+  "bundledQuestions": 185,
+  "updatesEnabled": false,
+  "sqliteNativeLibrary": true,
+  "zipIntegrity": "passed",
+  "bundledSourcesMatched": [
+    "App.tsx",
+    "content/organic-polymer.json",
+    "src/domain/engine.ts",
+    "src/data/repository.native.ts",
+    "src/data/io.native.ts"
+  ],
+  "deviceExecutionTested": false
+}

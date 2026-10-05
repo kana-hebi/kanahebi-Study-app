@@ -1,0 +1,91 @@
+const fs = require('node:fs'), http = require('node:http'), path = require('node:path'), assert = require('node:assert/strict');
+const { chromium } = require(process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES ? process.env.CODEX_PRIMARY_RUNTIME_NODE_MODULES + '/playwright' : 'playwright');
+const organic = JSON.parse(fs.readFileSync('content/organic-polymer.json'));
+const tests = [], errors = [];
+async function run() {
+  const root = path.resolve('dist');
+  const server = http.createServer((req, res) => {
+    let file = path.join(root, new URL(req.url, 'http://localhost').pathname);
+    if (file === root || file.endsWith('/')) file = path.join(file, 'index.html');
+    if (!file.startsWith(root + path.sep)) return res.writeHead(403).end();
+    try { res.setHeader('Content-Type', file.endsWith('.js') ? 'application/javascript' : file.endsWith('.html') ? 'text/html' : 'application/octet-stream'); res.end(fs.readFileSync(file)); }
+    catch { res.writeHead(404).end(); }
+  });
+  await new Promise(r => server.listen(8765, '127.0.0.1', r));
+  const executablePath = process.env.STUDY_CHROME_PATH;
+  const browser = await chromium.launch({ headless: true, ...(executablePath ? { executablePath } : {}), args: ['--no-zygote', '--single-process'] });
+  const context = await browser.newContext({ viewport: { width: 412, height: 892 }, deviceScaleFactor: 1 });
+  const page = await context.newPage(); page.on('pageerror', e => errors.push(String(e)));
+  try {
+    await page.goto('http://127.0.0.1:8765'); await page.getByRole('tab', { name: 'ホーム', exact: true }).waitFor();
+    // Only fixes the headless test host's missing Japanese system font. The app uses phone system fonts.
+    if (fs.existsSync('/tmp/NotoSansJP.ttf')) {
+      const data = fs.readFileSync('/tmp/NotoSansJP.ttf').toString('base64');
+      await page.addStyleTag({ content: `@font-face{font-family:TestJapanese;src:url(data:font/ttf;base64,${data})}*{font-family:TestJapanese,sans-serif !important}` });
+      await page.evaluate(() => document.fonts.ready);
+    }
+    assert.ok(await page.getByText('114知識 · 185問 · 13単元').isVisible());
+    await page.screenshot({ path: 'artifacts/home-mobile.png', fullPage: true }); tests.push('mobile home renders with all content available');
+    await page.getByRole('tab', { name: '自由学習', exact: true }).click();
+    await page.getByRole('switch', { name: '学習記録' }).uncheck();
+    const before = await page.evaluate(() => localStorage.getItem('kanahebi-study.v1'));
+    await page.getByRole('button', { name: '基礎：構造を読む', exact: true }).click();
+    await page.getByRole('button', { name: '選択', exact: true }).click();
+    await page.getByRole('button', { name: '5問', exact: true }).click();
+    await page.getByRole('button', { name: /条件から演習する/ }).click();
+    assert.ok(await page.getByText('記録OFF', { exact: true }).isVisible());
+    await page.getByRole('button', { name: 'わからない', exact: true }).click();
+    await page.getByRole('button', { name: 'ヒントを見る', exact: true }).click();
+    await page.getByRole('button', { name: '答えと解説を見る', exact: true }).click();
+    await page.screenshot({ path: 'artifacts/unknown-hints-mobile.png', fullPage: true });
+    assert.equal(await page.evaluate(() => localStorage.getItem('kanahebi-study.v1')), before);
+    page.once('dialog', d => d.accept()); await page.getByRole('button', { name: '終了', exact: true }).click();
+    assert.equal(await page.evaluate(() => localStorage.getItem('kanahebi-study.v1')), before); tests.push('OFF session unknown/hints/reveal/exit leaves storage byte-identical');
+    await page.getByRole('switch', { name: '学習記録' }).check();
+    await page.getByRole('button', { name: /条件から演習する/ }).click();
+    const prompt = await page.locator('body').innerText(); const q = organic.questions.find(q => q.kind === 'choice' && prompt.includes(q.prompt)); assert.ok(q);
+    await page.getByRole('button', { name: 'わからない', exact: true }).click();
+    await page.getByRole('button', { name: 'ヒントを見る', exact: true }).click();
+    await page.getByRole('button', { name: q.choices.find(c => c.id === q.answer).text, exact: true }).click();
+    assert.ok(await page.getByText('補助後に正答', { exact: true }).isVisible());
+    let data = await page.evaluate(() => JSON.parse(localStorage.getItem('kanahebi-study.v1')));
+    assert.equal(data.attempts.length, 1); assert.equal(data.attempts[0].firstOutcome, 'unknown'); assert.equal(data.attempts[0].finalOutcome, 'correct'); assert.equal(data.attempts[0].hintsUsed, 1); assert.equal(data.attempts[0].misconception, undefined);
+    tests.push('tracked first unknown remains unknown after hint-assisted success');
+    await page.reload(); await page.getByRole('tab', { name: 'ホーム', exact: true }).waitFor();
+    data = await page.evaluate(() => JSON.parse(localStorage.getItem('kanahebi-study.v1'))); assert.equal(data.attempts.length, 1); tests.push('reload preserves tracked learner data');
+    await context.setOffline(true);
+    await page.getByRole('tab', { name: 'コース', exact: true }).click(); await page.getByRole('button', { name: '練習する', exact: true }).first().click();
+    await page.getByRole('button', { name: 'わからない', exact: true }).click(); await page.getByRole('button', { name: '答えと解説を見る', exact: true }).click();
+    assert.ok(await page.getByRole('button', { name: /結果を見る|次の問題へ/ }).isVisible()); tests.push('loaded core learning grades and explains with network disabled');
+    page.once('dialog', d => d.accept()); await page.getByRole('button', { name: '終了', exact: true }).click();
+    await context.setOffline(false);
+    await page.getByRole('tab', { name: 'その他', exact: true }).click(); await page.getByText('反応マップ →', { exact: true }).click();
+    await page.getByRole('button', { name: '条件を隠す', exact: true }).first().click(); assert.ok(await page.getByText('↓ 条件を思い出してみよう', { exact: true }).isVisible()); tests.push('reaction conditions can be hidden and revealed');
+    await page.getByRole('button', { name: 'その他へ戻る', exact: true }).click(); await page.getByText('教材パック・データ →', { exact: true }).click();
+    const chooser = page.waitForEvent('filechooser'); await page.getByRole('button', { name: '専用教材パックを追加・更新', exact: true }).click();
+    page.once('dialog', d => d.accept()); await (await chooser).setFiles('content/math-check.study-pack.json');
+    await page.getByText('拡張テスト：一次方程式', { exact: true }).waitFor();
+    const card = page.getByText('拡張テスト：一次方程式', { exact: true }).locator('..'); await card.getByRole('button', { name: 'この教材に切り替える', exact: true }).click();
+    await page.getByRole('tab', { name: '自由学習', exact: true }).click(); await page.getByRole('button', { name: /条件から演習する/ }).click();
+    const math = JSON.parse(fs.readFileSync('content/math-check.study-pack.json')); const t = await page.locator('body').innerText(); const mq = math.questions.find(q => t.includes(q.prompt)); assert.ok(mq);
+    await page.getByRole('textbox', { name: '回答', exact: true }).fill(String(mq.answer)); await page.getByRole('button', { name: '回答する', exact: true }).click(); assert.ok(await page.getByText('正答です', { exact: true }).isVisible()); tests.push('file picker imports another subject and same UI grades it');
+    page.once('dialog', d => d.accept()); await page.getByRole('button', { name: '終了', exact: true }).click();
+    await page.getByRole('tab', { name: 'その他', exact: true }).click(); await page.getByText('教材パック・データ →', { exact: true }).click();
+    const downloadEvent = page.waitForEvent('download'); await page.getByRole('button', { name: 'バックアップを書き出す', exact: true }).click();
+    const backupPath = '/tmp/kanahebi-qa-backup.json'; await (await downloadEvent).saveAs(backupPath);
+    const backup = JSON.parse(fs.readFileSync(backupPath)); assert.equal(backup.settings.activePack, math.manifest.packId); assert.equal(backup.packs.length, 2); assert.equal(backup.attempts.length, 3);
+    await page.getByText(organic.manifest.title, { exact: true }).locator('..').getByRole('button', { name: 'この教材に切り替える', exact: true }).click();
+    await page.getByRole('tab', { name: '自由学習', exact: true }).click(); await page.getByRole('button', { name: '選択', exact: true }).click();
+    await page.getByRole('tab', { name: 'その他', exact: true }).click(); await page.getByText('教材パック・データ →', { exact: true }).click();
+    const restoreChooser = page.waitForEvent('filechooser'); await page.getByRole('button', { name: 'バックアップから復元', exact: true }).click();
+    page.once('dialog', d => d.accept()); await (await restoreChooser).setFiles(backupPath);
+    await page.waitForFunction(id => JSON.parse(localStorage.getItem('kanahebi-study.v1')).settings.activePack === id, math.manifest.packId);
+    assert.deepEqual(await page.evaluate(() => JSON.parse(localStorage.getItem('kanahebi-study.v1'))), backup);
+    await page.getByRole('tab', { name: '自由学習', exact: true }).click(); assert.ok(await page.getByRole('button', { name: '条件から演習する（最大3問）', exact: true }).isEnabled());
+    fs.unlinkSync(backupPath); tests.push('exported backup restores history, subject and usable filters through the file picker');
+    assert.equal(errors.length, 0, errors.join('\n'));
+    fs.writeFileSync('artifacts/web-qa.json', JSON.stringify({ date: new Date().toISOString(), viewport: '412x892', tests, pageErrors: errors, limitations: ['Browser adapter is not native SQLite', 'Network-disabled check occurs after loading; native offline cold start still requires device check'] }, null, 2));
+    console.log(JSON.stringify({ passed: tests.length, tests, errors }, null, 2));
+  } finally { await browser.close(); await new Promise(r => server.close(r)); }
+}
+run().catch(e => { console.error(e.message); process.exit(1); });
