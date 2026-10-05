@@ -28,14 +28,14 @@ export function statesFor(pack: ContentPack, all: Attempt[]): Record<string, Lea
   for (const n of pack.nodes) {
     const events = all.filter(a => a.packId === pack.manifest.packId && a.nodeIds.includes(n.id)).sort((a, b) => a.recordedAt - b.recordedAt || a.id.localeCompare(b.id));
     let score = 0, clean = 0, streak = 0, dueAt = 0, lastAt = 0;
-    const seen = new Set<string>(), cleanDays = new Set<number>(), misconceptions = new Set<string>();
+    const seen = new Set<string>(), cleanQuestions = new Set<string>(), cleanDays = new Set<number>(), misconceptions = new Set<string>();
     for (const a of events) {
       const unassisted = a.firstOutcome === 'correct' && !a.hintsUsed && !a.revealed;
       const newQuestion = !seen.has(a.questionId), newDay = !cleanDays.has(Math.floor(a.recordedAt / DAY));
       if (unassisted) {
         const gain = newQuestion ? .26 : newDay ? .12 : .02;
         score = Math.min(.99, score + gain); clean++; streak++;
-        cleanDays.add(Math.floor(a.recordedAt / DAY));
+        cleanQuestions.add(a.questionId); cleanDays.add(Math.floor(a.recordedAt / DAY));
         // Same-session repetition cannot grow the interval to weeks.
         dueAt = a.recordedAt + [1, 3, 7, 14, 30][Math.min(4, cleanDays.size - 1)] * DAY;
       } else {
@@ -44,7 +44,7 @@ export function statesFor(pack: ContentPack, all: Attempt[]): Record<string, Lea
       }
       seen.add(a.questionId); lastAt = a.recordedAt; if (a.misconception && a.firstOutcome !== 'unknown') misconceptions.add(a.misconception);
     }
-    const state = !events.length ? 'unseen' : score >= .85 && seen.size >= 3 && cleanDays.size >= 3 && streak >= 3 ? 'mastered'
+    const state = !events.length ? 'unseen' : score >= .85 && cleanQuestions.size >= 3 && cleanDays.size >= 3 && streak >= 3 ? 'mastered'
       : score >= .65 && clean >= 3 ? 'stable' : events.at(-1)!.firstOutcome !== 'correct' ? 'unstable' : 'learning';
     result[n.id] = { nodeId: n.id, score, state, attempts: events.length, cleanSuccesses: clean, distinctQuestions: seen.size, dueAt, lastAt, misconceptions: [...misconceptions] };
   }

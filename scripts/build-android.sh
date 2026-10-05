@@ -5,6 +5,7 @@ if [[ -z "${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}" ]]; then
   echo 'Set ANDROID_HOME or ANDROID_SDK_ROOT to an installed Android SDK.' >&2
   exit 1
 fi
+export NODE_ENV=production
 npx expo prebuild --platform android --no-install
 cd android
 ./gradlew --no-daemon --max-workers=2 assembleRelease -PreactNativeArchitectures=arm64-v8a

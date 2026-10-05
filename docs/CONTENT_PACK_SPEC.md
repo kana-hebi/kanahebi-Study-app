@@ -1,7 +1,15 @@
-# Content Pack Specification — draft v0
+# Content Pack Specification — v1 implementation and future design
 
-Status: design draft
+Status: schema v1 implemented; archive and advanced capabilities remain design proposals
 Date: 2026-10-06
+
+## Implemented format
+
+The current importer accepts a single UTF-8 JSON file containing `manifest`, `units`, `nodes`, `questions`, `reactions` and `sources`. The runtime contract is `src/domain/models.ts`, enforced by `src/domain/pack.ts`; see `content/math-check.study-pack.json` for a complete minimal example. The conceptual multi-file archive below is a future option, not the current import format.
+
+Required manifest fields are `packId`, `packVersion`, `schemaVersion: 1`, `title`, `subject`, `publisher`, `language`, `description` and `requiredCapabilities`. Unit, node, question and reaction IDs begin with `packId + '.'`. References and an acyclic prerequisite graph are mandatory. Every question needs at least two hints, an explanation and a valid source ID. Limits and update rules are described in [LEARNING_ENGINE.md](LEARNING_ENGINE.md).
+
+Currently supported capabilities are `question.multipleChoice.v1`, `question.textInput.v1`, `question.numericInput.v1`, `render.chemFormula.v1` and `view.reactionMap.v1`. Chemical formulas are Unicode/condensed text, not a molecular graph editor. KaTeX, arbitrary images, archive assets, optional-capability fallback, pack dependencies and ID migration are not implemented. Unknown required capabilities are rejected. Existing node deletion is rejected until a migration feature exists.
 
 ## 1. Purpose
 
@@ -61,7 +69,7 @@ The physical format can be a ZIP-based package later; the logical schema matters
 
 ## 4. Manifest draft
 
-Conceptual fields:
+Example of the currently implemented manifest (additional capabilities below are future examples):
 
 ```json
 {
@@ -71,15 +79,13 @@ Conceptual fields:
   "title": "大学受験 有機化学・高分子",
   "language": "ja-JP",
   "subject": "chemistry",
-  "domain": "organic-polymer",
   "publisher": "kanahebi-study-app",
+  "description": "有機・高分子の導入と基本演習",
   "requiredCapabilities": [
     "question.multipleChoice.v1",
     "question.textInput.v1",
-    "render.math.v1",
-    "render.chemFormula.v1"
-  ],
-  "optionalCapabilities": [
+    "question.numericInput.v1",
+    "render.chemFormula.v1",
     "view.reactionMap.v1"
   ]
 }
@@ -238,4 +244,3 @@ These do not block the organic/polymer MVP, but the schema should avoid making t
 - 外部の生データ・任意形式・他人製パックをアプリへ直接投入する機能は想定しない。アプリが受け取るのは開発者が用意した対応形式のパックのみ。スマホでの専用パック追加・更新と他教科への拡張は維持する。
 - アプリ内のAI教材パッケージング、自動スクレイピング、公開第三者パック市場、汎用外部形式変換は現スコープ外。無料AIによる変換も今回実装しない。
 - 自作への変換は出典や利用条件を消すことではない。素材の出典・利用条件・改変内容を記録し、再配布可能性を確認して教材化する。
-

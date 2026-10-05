@@ -70,6 +70,14 @@ test('guidance has no locks and a verified prerequisite permits the next node', 
   const session = makeSession(pack.manifest.packId, 'course'); const states = statesFor(pack, [event(session)]);
   const r = recommend(pack, states, 1600); assert.equal(r.length, pack.nodes.length); assert.equal(r[0].node.id, pack.nodes[1].id);
 });
+test('failed distinct questions cannot inflate mastery from one successful question', () => {
+  const session = makeSession(pack.manifest.packId, 'course');
+  const history = [event(session, { id: 'wrong1', questionId: 'different1', firstOutcome: 'incorrect', finalOutcome: 'incorrect' }),
+    event(session, { id: 'wrong2', questionId: 'different2', firstOutcome: 'unknown', finalOutcome: null }),
+    ...Array.from({ length: 12 }, (_, i) => event(session, { id: `success${i}`, recordedAt: (i + 1) * 86400000 }))];
+  const state = statesFor(pack, history)[pack.nodes[0].id];
+  assert.ok(state.score >= .85); assert.equal(state.distinctQuestions, 3); assert.notEqual(state.state, 'mastered');
+});
 test('separate mathematics pack works with the same grading and learner engine', () => {
   const { repo, db } = repository(); repo.install(math); const q = math.questions[0]; assert.equal(grade(q, '4')?.outcome, 'correct');
   const session = makeSession(math.manifest.packId, 'free'); repo.saveAttempt(session, event(session, { questionId: q.id, nodeIds: q.nodeIds }));

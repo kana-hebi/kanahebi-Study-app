@@ -9,3 +9,5 @@ ios/
 local.properties
 .env*
 coverage/
+artifacts/*.apk
+artifacts/*.zip

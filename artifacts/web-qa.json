@@ -1,0 +1,19 @@
+{
+  "date": "2026-10-05T17:16:41.535Z",
+  "viewport": "412x892",
+  "tests": [
+    "mobile home renders with all content available",
+    "OFF session unknown/hints/reveal/exit leaves storage byte-identical",
+    "tracked first unknown remains unknown after hint-assisted success",
+    "reload preserves tracked learner data",
+    "loaded core learning grades and explains with network disabled",
+    "reaction conditions can be hidden and revealed",
+    "file picker imports another subject and same UI grades it",
+    "exported backup restores history, subject and usable filters through the file picker"
+  ],
+  "pageErrors": [],
+  "limitations": [
+    "Browser adapter is not native SQLite",
+    "Network-disabled check occurs after loading; native offline cold start still requires device check"
+  ]
+}
