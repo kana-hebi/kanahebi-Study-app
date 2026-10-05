@@ -58,11 +58,11 @@ Evidence and limits: [docs/RELEASE_VALIDATION.md](docs/RELEASE_VALIDATION.md), [
 2. Independently review chemistry. Increase distinct question density per node and add substantially more worked structure determination, synthesis and quantitative integration. Topic coverage does not establish advanced-exam sufficiency.
 3. Evaluate the provisional learning model with real usage. Scores are not calibrated probabilities; response time is collected but not penalized. Some nodes cannot reach mastery with the current distinct-question count.
 4. Implement controlled ID retirement/migration before removing nodes in pack updates. Rich molecular/math rendering, archive assets, cloud sync and iOS distribution remain future work.
-5. Merge the reviewable branch only after explicit authorization; do not retry the rejected main action through another route.
+5. Integrate PR #1 into main in this run, with the user's explicit authorization; verify the resulting main content and update this status.
 
 ## Approval boundary and next run
 
-Automatic approval review rejected an attempted push to public default `main`, stating insufficient explicit publishing authorization. Accepted independent-branch checkpoints preserve the work; this rejection has not been bypassed.
+The prior automatic approval review rejected main publication for insufficient explicit authorization. On 2026-10-06 JST, the user explicitly authorized the action and asked to retry it. This run will verify the unchanged release checkpoint, mark PR #1 ready, merge with an expected-head guard, then verify main and record completion. Application code is not changed in this integration run.
 
 Read README, STATUS and AGENTS first. Reproduce with Node 24, Java 17, SDK/Build Tools 36, NDK 27.1.12297006 and CMake 3.22.1. Run `npm ci`, `npm run typecheck`, `npm run validate:content`, `npm test`, `npm run export:web`, then with ANDROID_HOME set, `npm run build:android` and `python scripts/inspect-apk.py`.
 
