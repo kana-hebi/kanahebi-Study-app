@@ -1,0 +1,30 @@
+{
+  "expo": {
+    "name": "かなへび学習室",
+    "slug": "kanahebi-study-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "dark",
+    "updates": { "enabled": false },
+    "plugins": ["expo-sqlite", "expo-document-picker"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "lab.kanahebi.study"
+    },
+    "android": {
+      "package": "lab.kanahebi.study",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
+  }
+}

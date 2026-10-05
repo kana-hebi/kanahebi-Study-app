@@ -1,0 +1,98 @@
+{
+  "manifest": {
+    "packId": "jp.math.linear-check",
+    "packVersion": "0.1.0",
+    "schemaVersion": 1,
+    "title": "拡張テスト：一次方程式",
+    "subject": "mathematics",
+    "publisher": "kanahebi-study-app",
+    "language": "ja-JP",
+    "requiredCapabilities": [
+      "question.numericInput.v1"
+    ],
+    "description": "他教科への拡張確認用の小さな専用教材パック。3問。"
+  },
+  "units": [
+    {
+      "id": "jp.math.linear-check.unit.linear",
+      "title": "一次方程式",
+      "stage": 0,
+      "summary": "同じ数を両辺へ加減し、係数で割る"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "jp.math.linear-check.node.linear",
+      "unitId": "jp.math.linear-check.unit.linear",
+      "title": "一次方程式を解く",
+      "dimension": "calculation",
+      "prerequisites": [],
+      "lesson": {
+        "core": "両辺へ同じ操作を行い、xを孤立させる。",
+        "example": "2x+3=11なら2x=8よりx=4。",
+        "caution": "移項の符号と最後の代入確認を忘れない。"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "jp.math.linear-check.q.0",
+      "nodeIds": [
+        "jp.math.linear-check.node.linear"
+      ],
+      "kind": "numeric",
+      "difficulty": 1,
+      "prompt": "2x+3=11。xの値は？",
+      "answer": 4,
+      "tolerance": 0,
+      "hints": [
+        "xを含まない項を移す。",
+        "両辺から3を引き、2で割る。"
+      ],
+      "explanation": "2x=8なのでx=4。元の式へ代入して成立を確認できる。",
+      "sourceId": "original"
+    },
+    {
+      "id": "jp.math.linear-check.q.1",
+      "nodeIds": [
+        "jp.math.linear-check.node.linear"
+      ],
+      "kind": "numeric",
+      "difficulty": 1,
+      "prompt": "3x+4=19。xの値は？",
+      "answer": 5,
+      "tolerance": 0,
+      "hints": [
+        "xを含まない項を移す。",
+        "両辺から4を引き、3で割る。"
+      ],
+      "explanation": "3x=15なのでx=5。元の式へ代入して成立を確認できる。",
+      "sourceId": "original"
+    },
+    {
+      "id": "jp.math.linear-check.q.2",
+      "nodeIds": [
+        "jp.math.linear-check.node.linear"
+      ],
+      "kind": "numeric",
+      "difficulty": 1,
+      "prompt": "5x+2=32。xの値は？",
+      "answer": 6,
+      "tolerance": 0,
+      "hints": [
+        "xを含まない項を移す。",
+        "両辺から2を引き、5で割る。"
+      ],
+      "explanation": "5x=30なのでx=6。元の式へ代入して成立を確認できる。",
+      "sourceId": "original"
+    }
+  ],
+  "reactions": [],
+  "sources": [
+    {
+      "id": "original",
+      "title": "拡張検証用オリジナル問題",
+      "use": "本プロジェクトが新規作成"
+    }
+  ]
+}

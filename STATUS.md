@@ -11,7 +11,9 @@ Run start (2026-10-06 JST): remote `main` at `f97fae8` and local checkout were r
 
 The user requests autonomous work toward a usable organic/polymer release while they sleep. Routine design, implementation and repository updates are authorized. The initial target is an Android-first standalone offline app with the approved five-tab navigation, guided/free learning, tracked/untracked sessions, unknown/hints, explanations, review and app-native pack support. Broad organic/polymer teaching coverage is the target; a first usable release is not evidence of validated difficult-university-level completeness.
 
-Current task: prepare curriculum/data contracts and a reproducible Expo environment, then implement and test in milestones. See `docs/AUTONOMOUS_RUN.md` for acceptance gates and fallback decisions. Update this section at each durable checkpoint and at run end.
+Checkpoint: Expo SDK 57 / React Native / TypeScript source now implements all five destinations, tracked/untracked learning, explicit unknown and staged hints, deterministic grading, review, reference, history, native-pack import and local backup. The organic/polymer pack has 13 units, 114 nodes, 185 questions and 18 reaction relationships; a separate 3-question math pack tests subject extensibility. Type checking, Web export, pack validation and 13 core tests passed. Android SDK/build tools are installed and arm64 release compilation is in progress. UI interaction and Android-device gates remain unverified. See `docs/AUTONOMOUS_RUN.md` for acceptance gates and fallback decisions.
+
+Repository persistence: changes are on `work/offline-first-release-20261006`. Automatic approval review rejected a push to public `main` for insufficient explicit publishing authorization. The independent work branch was created and the preparation checkpoint saved through the GitHub connector. Do not retry `main` through another mechanism. Native build and further source checkpoints belong on this branch until authorized merge.
 
 ## Confirmed decisions
 

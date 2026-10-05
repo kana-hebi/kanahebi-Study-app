@@ -1,0 +1,59 @@
+[
+  {
+    "file": "content/organic-polymer.json",
+    "packId": "jp.exam.chemistry.organic-polymer",
+    "units": 13,
+    "nodes": 114,
+    "questions": 185,
+    "reactions": 18,
+    "types": {
+      "choice": 114,
+      "text": 57,
+      "numeric": 14
+    },
+    "stages": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "checks": [
+      "schema",
+      "capabilities",
+      "unique IDs",
+      "reference integrity",
+      "acyclic prerequisite graph",
+      "every knowledge node has an exercise",
+      "hints and explanations present"
+    ]
+  },
+  {
+    "file": "content/math-check.study-pack.json",
+    "packId": "jp.math.linear-check",
+    "units": 1,
+    "nodes": 1,
+    "questions": 3,
+    "reactions": 0,
+    "types": {
+      "choice": 0,
+      "text": 0,
+      "numeric": 3
+    },
+    "stages": [
+      0
+    ],
+    "checks": [
+      "schema",
+      "capabilities",
+      "unique IDs",
+      "reference integrity",
+      "acyclic prerequisite graph",
+      "every knowledge node has an exercise",
+      "hints and explanations present"
+    ]
+  }
+]
