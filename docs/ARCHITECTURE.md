@@ -189,7 +189,7 @@ Later possibilities:
 - university/difficulty-focused sets
 - mathematics
 - other exam subjects
-- user/third-party authored packs
+- developer-authored packs prepared from reviewed source materials
 
 Content Pack details are defined in `docs/CONTENT_PACK_SPEC.md`.
 
@@ -375,3 +375,15 @@ MVP must include:
 Only after this loop works reliably should the content bank expand across all organic chemistry and polymers.
 
 After the organic/polymer architecture is stable, a small second-domain pack should be imported as an architectural test to prove that the core is not accidentally chemistry-hardcoded.
+
+## Confirmed decisions — 2026-10-06 handoff
+
+- コース学習は原則ロックなし。前提不足は推奨として提示し、本人が望めば先へ進める。
+- 自由学習は記録ONが既定。OFFでは採点・解説・一時集計を利用できるが、終了後に解答履歴・習熟度・弱点・復習予定・コース進捗を残さない。ブックマークなど成績と無関係な明示操作は保存する。
+- 「わからない」の後は「ヒントを見る」「答えと解説を見る」に分岐する。最初の想起失敗とヒント後の成功を別の証拠として扱い、無補助の正解に上書きしない。
+- 既習範囲は3〜5問程度の理解度チェックでスキップできる。自己申告だけで習得済みにしない。通過を恒久的習得の証明とは扱わず、以後の証拠で更新する。
+- 教材は開発者であるアシスタントがアプリ専用の自作Content Packへ整える。ネット上の問題・資料やユーザー提供素材を分析し、解答、詳細解説、段階ヒント、必要知識ノード、誤答分類、出典情報を付与して検証する。
+- 外部の生データ・任意形式・他人製パックをアプリへ直接投入する機能は想定しない。アプリが受け取るのは開発者が用意した対応形式のパックのみ。スマホでの専用パック追加・更新と他教科への拡張は維持する。
+- アプリ内のAI教材パッケージング、自動スクレイピング、公開第三者パック市場、汎用外部形式変換は現スコープ外。無料AIによる変換も今回実装しない。
+- 自作への変換は出典や利用条件を消すことではない。素材の出典・利用条件・改変内容を記録し、再配布可能性を確認して教材化する。
+
