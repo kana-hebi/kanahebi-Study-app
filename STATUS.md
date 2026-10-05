@@ -4,7 +4,9 @@ Last updated: 2026-10-06 JST / 2026-10-05 UTC
 
 ## Current phase
 
-**First Android distribution v0.1.0 built; automated checks passed; real-device acceptance remains open.**
+**Polymer content enrichment and offline rich lesson/diagram rendering in progress. Previous v0.1.0 checks are historical; the new revision is not yet verified.**
+
+Current user request (2026-10-06 JST): replace shallow polymer explanations with source-grounded deeper instruction, many exercises and diagrams. Run plan: inspect gaps; consult primary educational/manufacturer sources; author detailed polymer lessons, worked examples, distinct questions and exact offline diagrams; preserve existing IDs/history; validate schema and chemistry calculations; verify phone-width rendering and native build; persist source/content and deliver the updated package. Research facts inform original writing and exercises; third-party text, figures and exam questions are not bulk-republished.
 
 GitHub `main` is the canonical project storage and now contains the implementation, content and documents. The original release run began with `main` at `f97fae8`, containing five design documents and no app code. That run produced the app, original content, validation tools and a standalone Android APK.
 
