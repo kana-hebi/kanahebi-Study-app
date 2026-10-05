@@ -1,11 +1,11 @@
 # Product Specification — kanahebi Study App
 
 Status: initial design
-Date: 2026-10-05
+Date: 2026-10-06
 
 ## 1. Product goal
 
-Build a study application that covers Japanese university entrance exam organic chemistry and polymers from foundational knowledge through difficult-university entrance-exam level.
+Build a local-first study application that starts with Japanese university entrance exam organic chemistry and polymers, from foundational knowledge through difficult-university entrance-exam level, while remaining extensible to other chemistry domains and eventually other subjects through importable Content Packs.
 
 The app must support both:
 
@@ -14,11 +14,13 @@ The app must support both:
 
 The product should behave more like a tutor + structured course + problem bank than a static quiz app.
 
+The application core must not be hard-wired to organic chemistry. Organic chemistry + polymers is the first production-quality content domain, not the permanent architectural boundary.
+
 ---
 
 ## 2. Primary learning modes
 
-### 2.1 Story Mode
+### 2.1 コース学習 (Guided Course)
 
 Adaptive/personalized progression.
 
@@ -45,29 +47,48 @@ Example:
 
 The system should record these separately and generate targeted follow-up practice.
 
-### 2.2 Free Mode
+### 2.2 自由学習 (Free Study)
 
 Manual/self-directed learning.
 
-The learner can choose from lists and filters without waiting for the adaptive course to select content.
+The learner can choose from lists and filters without waiting for the guided course to select content.
 
 Required entry points:
 
 - unit / chapter
 - concept / knowledge item
-- reaction type
+- reaction or domain-specific relationship type
 - problem type
 - difficulty
 - weakness list
-- reaction map
+- domain-specific maps/views
 - exam-style set
 - knowledge check
 
-Free Mode is a first-class mode, not a debug/secondary interface.
+Free Study is a first-class mode, not a debug/secondary interface.
+
+#### Default: tracked free study
+
+By default, Free Study attempts emit the same learner-model evidence as Guided Course attempts. Correctness, misconception evidence, hints, latency, retention and related signals can therefore improve mastery estimates and review scheduling.
+
+#### Optional: untracked free study
+
+The learner can disable personalization impact for a Free Study session.
+
+In this state:
+
+- questions, hints, grading and explanations work normally;
+- the session can show temporary/session results;
+- mastery estimates are not changed;
+- weakness state is not changed;
+- review scheduling is not changed;
+- Guided Course progression is not changed.
+
+This mode exists for experimentation, checking a future topic, repeating known material casually, trying imported content, or any situation where the learner does not want the activity to influence personalization.
 
 ---
 
-## 3. Curriculum scope
+## 3. Initial curriculum scope: organic chemistry + polymers
 
 ### Stage 0 — foundations for reading organic chemistry
 
@@ -190,11 +211,33 @@ Key reaction relationships include:
 
 ---
 
-## 4. Knowledge model
+## 4. Multi-subject direction
+
+The application core must support installing additional subject/domain Content Packs later.
+
+Examples:
+
+- inorganic chemistry
+- theoretical/physical chemistry
+- complete high-school chemistry
+- mathematics
+- other exam subjects
+
+A Content Pack may define curriculum nodes, prerequisites, lessons, questions, explanations, hints, misconception tags, assets and metadata using capabilities already supported by the app.
+
+Content Packs are declarative data packages. They must not require arbitrary code execution.
+
+If a future subject requires a fundamentally new interaction type (for example, a graph editor, proof-step editor, specialized molecular drawing canvas, audio pronunciation capture), the app core can add that as a versioned capability. Content Packs can then declare that capability as a requirement.
+
+---
+
+## 5. Knowledge model
 
 The app should not represent ability with only one score.
 
-Use a multidimensional skill model, for example:
+Use a multidimensional skill model. The dimensions are content-pack-defined but use a common engine.
+
+Organic chemistry examples:
 
 - structural-formula reading
 - naming
@@ -221,6 +264,7 @@ Example states:
 Potential evidence inputs:
 
 - correctness
+- explicit "I don't know"
 - answer latency
 - hint level used
 - repeated misconception
@@ -230,7 +274,7 @@ Potential evidence inputs:
 
 ---
 
-## 5. Misconception tracking
+## 6. Misconception tracking
 
 The system should identify *what kind* of error occurred.
 
@@ -246,11 +290,13 @@ Examples:
 - reactant/product reversal
 - correct fact but failed application
 
-This misconception graph should influence both Story Mode and recommended review in Free Mode.
+Misconception tags influence Guided Course decisions and recommended review in tracked Free Study.
+
+An explicit "I don't know" is different from choosing a wrong distractor. It indicates failed recall/insufficient knowledge without inventing a misconception that was not demonstrated.
 
 ---
 
-## 6. Question types
+## 7. Question types and answer UX
 
 Initial supported types should include:
 
@@ -271,16 +317,31 @@ Initial supported types should include:
 - experimental interpretation
 - integrated exam-style problem
 
+### "わからない" action
+
+Selection-based questions must provide an explicit **「わからない」** action.
+
+It should not be hidden among distractors. It is an answer-state action with separate semantics:
+
+- do not treat it as a guessed wrong choice;
+- record retrieval/knowledge failure when tracking is enabled;
+- do not assign a distractor-specific misconception;
+- increase the priority of explanation/review appropriately;
+- allow the learner to continue without forced guessing.
+
+Where useful, non-selection questions may also expose the same action.
+
 Long-term target:
 
 - learner constructs/draws a structure as the answer
 - graph-based validation of chemical structures
+- additional subject-specific answer capabilities
 
 ---
 
-## 7. Explanation system
+## 8. Explanation system
 
-Do not expose the full answer immediately unless requested.
+Do not expose the full answer immediately unless requested or the interaction requires it.
 
 Suggested staged help:
 
@@ -309,13 +370,13 @@ Explain:
 - related concept distinction
 - reaction/structure relation where relevant
 
-Hint usage should affect mastery estimation.
+Hint usage should affect mastery estimation only when the session is tracked.
 
 ---
 
-## 8. Review / personalization
+## 9. Review / personalization
 
-Use spaced review, but operate on chemistry knowledge/skill nodes rather than only flashcards.
+Use spaced review, but operate on knowledge/skill nodes rather than only flashcards.
 
 A learner may know a substance name but fail the reaction connection between two substances. These should be separate competencies.
 
@@ -327,11 +388,15 @@ Examples:
 
 Review scheduling should take this distinction into account.
 
+All tracked learning surfaces emit compatible evidence. Untracked Free Study deliberately does not alter the learner model.
+
 ---
 
-## 9. Reaction Map
+## 10. Domain-specific maps and views
 
-Provide a visual network of important conversions.
+The app can expose optional domain-specific learning surfaces while preserving a generic core.
+
+For organic chemistry, the first such surface is a Reaction Map.
 
 Examples:
 
@@ -352,9 +417,11 @@ Possible interactions:
 - hide reaction type
 - start from target and reconstruct route backward
 
+Future subjects can define other views when the app supports the required capability.
+
 ---
 
-## 10. Exam-derived / modified problems
+## 11. Exam-derived / modified problems
 
 The app may use real entrance-exam problems as analysis material where legally appropriate, but the default generated practice bank should avoid simple copying.
 
@@ -372,91 +439,99 @@ For public distribution, copyright/licensing requirements must be checked before
 
 ---
 
-## 11. Content generation policy
+## 12. Content generation policy
 
-Do not rely on unconstrained AI generation for chemistry questions.
+Do not rely on unconstrained AI generation for trusted questions.
 
 Preferred architecture:
 
-- human/validated canonical concepts and reaction data
+- human/validated canonical concepts and domain facts
 - validated problem templates
 - constrained parameter variation
-- deterministic chemistry checks where possible
-- AI for explanation, misconception interpretation, and variation drafting
+- deterministic checks where possible
+- AI for explanation, misconception interpretation, variation drafting and authoring assistance
 - automated + human validation before promotion to trusted question bank
 
-The system must guard against:
+The system must guard against domain-specific invalid content such as:
 
 - impossible structures
 - ambiguous multiple answers
 - missing reaction conditions
 - inconsistent numerical values
 - incorrect stoichiometry
-- reactions outside the intended curriculum without explanation
 
 ---
 
-## 12. Proposed navigation
+## 13. Proposed navigation
 
-Primary navigation candidates:
+Primary smartphone navigation:
 
 - Home
-- Story
-- Free Study
-- Reaction Map
-- Weaknesses / Review
-- Exam
-- Reference
+- コース学習
+- 自由学習
+- 復習
+- その他
+
+Secondary destinations include:
+
+- domain-specific map/view (Reaction Map for organic chemistry)
+- exam / integrated sets
+- reference
+- progress/history
+- Content Pack management
+- settings
 
 Home should surface at minimum:
 
 - today's review workload
-- current Story Mode position
+- current Guided Course position
 - current/new unit
 - weak concepts
 - progress summary
 
 ---
 
-## 13. Initial technical direction
+## 14. Initial technical direction
 
-Current provisional direction:
+Current preferred direction:
 
-- TypeScript-based application
-- mobile-first web UI
-- offline-capable architecture
-- later Android packaging / APK distribution if useful
-- separation of app code, curriculum, question data, reactions, explanations, and learner progress
-
-Exact framework and storage design are not yet fixed.
+- React Native + Expo
+- TypeScript
+- SQLite
+- offline/local-first architecture
+- versioned, declarative Content Packs
+- capability-based question/rendering engine
+- separation of app code, content, learner progress and optional online services
 
 ---
 
-## 14. MVP principle
+## 15. MVP principle
 
 Do not build thousands of questions first.
 
 Recommended build order:
 
-1. complete curriculum / prerequisite design
-2. knowledge-skill graph
-3. question schema
-4. learner-state schema
-5. Story Mode logic
-6. Free Mode UI/filters
-7. explanation/hint engine
-8. Stage 0 content set
-9. real-user validation
-10. revise adaptive logic
-11. expand across all organic chemistry and polymers
+1. complete organic/polymer curriculum / prerequisite design
+2. define generic knowledge-skill graph contract
+3. define Content Pack schema and capability model
+4. define question schema and answer evaluation rules
+5. define learner-state/evidence schema
+6. define Guided Course progression logic
+7. define Free Study navigation, filters and tracked/untracked behavior
+8. define explanation/hint engine
+9. implement Stage 0 content set
+10. real-user validation
+11. revise adaptive logic
+12. expand across all organic chemistry and polymers
+13. validate the generic architecture by importing a second small subject/domain pack
 
 ---
 
-## 15. Current confirmed UX principle
+## 16. Current confirmed UX principle
 
-The application should feel like two complementary game modes:
+The application has two complementary learning routes:
 
-- **Story Mode**: the system guides the learner through the best next path.
-- **Free Mode**: the learner can freely select and practice any unlocked/available content from an organized list.
+- **コース学習 (Guided Course)**: the system recommends and connects the best next learning/review actions.
+- **自由学習 (Free Study)**: the learner freely selects available content. Personalization impact is on by default and can be disabled per session.
 
-Neither mode replaces the other.
+Neither route replaces the other.
