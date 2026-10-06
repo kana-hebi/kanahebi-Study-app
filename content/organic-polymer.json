@@ -19451,6 +19451,24 @@
         },
         {
           "type": "line",
+          "x1": 19,
+          "y1": 48,
+          "x2": 47,
+          "y2": 48,
+          "color": "text",
+          "dashed": false
+        },
+        {
+          "type": "line",
+          "x1": 279,
+          "y1": 48,
+          "x2": 308,
+          "y2": 48,
+          "color": "text",
+          "dashed": false
+        },
+        {
+          "type": "line",
           "x1": 90,
           "y1": 48,
           "x2": 133,
@@ -20089,7 +20107,7 @@
     {
       "id": "jp.exam.chemistry.organic-polymer.diagram.polysaccharide",
       "title": "デンプンとセルロースの結合",
-      "description": "デンプンの直鎖部は主にα-1,4、分岐部はα-1,6。セルロースはβ-1,4。α/βは単なる鎖の長さではなく結合の立体配置の違いで、模式図の記号だけから立体構造を読むものではない。",
+      "description": "上はアミロペクチンの一部。直鎖部はα-1,4、分岐はα-1,6。分岐しないアミロースもα-1,4。セルロースはβ-1,4。α/βは単なる鎖の長さではなく結合の立体配置の違いで、模式図の記号だけから立体構造を読むものではない。",
       "width": 320,
       "height": 273,
       "elements": [
@@ -20097,7 +20115,7 @@
           "type": "text",
           "x": 160,
           "y": 24,
-          "text": "α型：主鎖と分岐（デンプン）",
+          "text": "α型：アミロペクチンの分岐",
           "color": "gold",
           "size": 14,
           "align": "middle"
@@ -20124,10 +20142,28 @@
           "type": "text",
           "x": 160,
           "y": 130,
-          "text": "G − G",
+          "text": "G",
           "color": "gold",
           "size": 17,
           "align": "middle"
+        },
+        {
+          "type": "text",
+          "x": 220,
+          "y": 130,
+          "text": "G",
+          "color": "gold",
+          "size": 17,
+          "align": "middle"
+        },
+        {
+          "type": "line",
+          "x1": 177,
+          "y1": 123,
+          "x2": 203,
+          "y2": 123,
+          "color": "gold",
+          "dashed": false
         },
         {
           "type": "text",

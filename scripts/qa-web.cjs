@@ -34,6 +34,7 @@ async function run() {
     const svg = page.locator('svg').first(); assert.ok((await svg.boundingBox()).height > 60);
     await page.getByRole('button', { name: '例題の解き方を見る', exact: true }).click();
     assert.ok(await page.getByText('答え：' + example.answer, { exact: true }).isVisible());
+    await svg.scrollIntoViewIfNeeded();
     await page.screenshot({ path: 'artifacts/polymer-lesson-mobile.png', fullPage: true });
     await page.getByRole('button', { name: '図を拡大する', exact: true }).first().click();
     await page.getByRole('button', { name: '図を閉じる', exact: true }).waitFor();
@@ -56,6 +57,7 @@ async function run() {
     await page.setViewportSize({ width: 320, height: 740 });
     assert.ok((await page.locator('svg').first().boundingBox()).height > 60);
     assert.equal(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), true);
+    await page.locator('svg').first().scrollIntoViewIfNeeded();
     await page.screenshot({ path: 'artifacts/polymer-pmma-320.png', fullPage: true });
     await page.setViewportSize({ width: 412, height: 892 });
     await page.getByRole('button', { name: '戻る', exact: true }).click();
@@ -81,6 +83,7 @@ async function run() {
     assert.ok((await page.locator('svg').first().boundingBox()).height > 60);
     await page.getByRole('button', { name: pq.choices.find(c => c.id === pq.answer).text, exact: true }).click();
     assert.ok(await page.getByText('正答です', { exact: true }).isVisible());
+    await page.locator('svg').first().scrollIntoViewIfNeeded();
     await page.screenshot({ path: 'artifacts/polymer-exercise-mobile.png', fullPage: true });
     page.once('dialog', d => d.accept()); await page.getByRole('button', { name: '終了', exact: true }).click();
     assert.equal(await page.evaluate(() => localStorage.getItem('kanahebi-study.v1')), exerciseBefore);
@@ -137,6 +140,7 @@ async function run() {
     const backup = JSON.parse(fs.readFileSync(backupPath)); assert.equal(backup.settings.activePack, math.manifest.packId); assert.equal(backup.packs.length, 2); assert.equal(backup.attempts.length, 3);
     await page.getByText(organic.manifest.title, { exact: true }).locator('..').getByRole('button', { name: 'この教材に切り替える', exact: true }).click();
     await page.getByRole('tab', { name: '自由学習', exact: true }).click(); await page.getByRole('button', { name: '選択', exact: true }).click();
+    await page.getByRole('button', { name: '詳しい教材（40知識）', exact: true }).click();
     await page.getByRole('tab', { name: 'その他', exact: true }).click(); await page.getByText('教材パック・データ →', { exact: true }).click();
     const restoreChooser = page.waitForEvent('filechooser'); await page.getByRole('button', { name: 'バックアップから復元', exact: true }).click();
     page.once('dialog', d => d.accept()); await (await restoreChooser).setFiles(backupPath);

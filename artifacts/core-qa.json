@@ -1,0 +1,16 @@
+{
+  "version": "0.2.0",
+  "command": "npm test",
+  "passed": 20,
+  "failed": 0,
+  "evidence": "Observed on final content before execution environment disconnected; this summary was recovered after disconnection.",
+  "coverage": [
+    "14 existing core tests",
+    "56 independent numeric answer checks",
+    "114 prior node IDs and 185 answer contracts",
+    "native SQLite and browser legacy pack upgrade preservation",
+    "atomic invalid-vector update rejection",
+    "rich lesson search and deep exercise coverage"
+  ],
+  "deviceExecutionTested": false
+}

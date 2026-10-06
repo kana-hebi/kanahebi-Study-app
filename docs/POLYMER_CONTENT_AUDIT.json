@@ -45,5 +45,18 @@
   "diagramCount": 44,
   "workedExamples": 40,
   "newExercises": 180,
+  "deepExercises": 232,
+  "instructionalDiagrams": 29,
+  "exerciseDiagrams": 15,
+  "newKinds": {
+    "choice": 89,
+    "text": 35,
+    "numeric": 56
+  },
+  "newDifficulties": {
+    "1": 32,
+    "2": 91,
+    "3": 57
+  },
   "method": "Original writing, original exact vector drawings and original exercises; links used only for fact checking and instructional scope."
 }

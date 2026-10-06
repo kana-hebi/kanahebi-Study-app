@@ -217,7 +217,7 @@ math=dict(manifest=dict(packId=M,packVersion='0.1.0',schemaVersion=1,title='拡�
  questions=[dict(id=f'{M}.q.{i}',nodeIds=[mid],kind='numeric',difficulty=1,prompt=f'{a}x+{b}={a*x+b}。xの値は？',answer=x,tolerance=0,hints=['xを含まない項を移す。',f'両辺から{b}を引き、{a}で割る。'],explanation=f'{a}x={a*x}なのでx={x}。元の式へ代入して成立を確認できる。',sourceId='original') for i,(a,b,x) in enumerate([(2,3,4),(3,4,5),(5,2,6)])],
  reactions=[],sources=[dict(id='original',title='拡張検証用オリジナル問題',use='本プロジェクトが新規作成')])
 (out/'math-check.study-pack.json').write_text(json.dumps(math,ensure_ascii=False,indent=2)+'\n')
-print(f'Organic/polymer: {len(units)} units, {len(nodes)} knowledge nodes, {len(questions)} questions, {len(reactions)} reactions')
+print(f'Base organic/polymer: {len(units)} units, {len(nodes)} knowledge nodes, {len(questions)} questions, {len(reactions)} reactions', flush=True)
 
 # Deep polymer additions are reproducible; importing packs never executes this authoring code.
 import subprocess, sys

@@ -1,7 +1,8 @@
 {
-  "date": "2026-10-05T23:50:46.607Z",
+  "version": "0.2.0",
   "diagrams": 44,
-  "textElements": 264,
+  "textElements": 265,
   "clippedText": [],
+  "evidence": "Final glyph check passed before execution environment disconnected; recovered summary. Tracked PNG gallery is the preceding 44-diagram review snapshot (264 text elements), before two final polysaccharide/PVA fragment corrections.",
   "limits": "Browser glyph bounds using Noto Sans JP; native font and expanded Android view require device acceptance"
 }

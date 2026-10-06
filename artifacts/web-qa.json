@@ -20,5 +20,10 @@
   "limitations": [
     "Browser adapter is not native SQLite",
     "Network-disabled check occurs after loading; native offline cold start still requires device check"
-  ]
+  ],
+  "finalRevisionRecheck": {
+    "passed": 13,
+    "pageErrors": [],
+    "evidence": "Observed after final diagram corrections and screenshot scroll/backup deep-scope assertions, before execution environment disconnected. Existing PNGs are earlier review snapshots."
+  }
 }

@@ -1,22 +1,22 @@
 # STATUS — canonical project state
 
-Last updated: 2026-10-06 JST / 2026-10-05 UTC
+Last updated: 2026-10-06 UTC
 
 ## Current phase
 
-**Polymer v0.2.0 source/content implemented; automated checks and browser rendering verified. Android rebuild and final integration are in progress.**
+**Polymer v0.2.0 implementation, content, automated verification and native build/inspection are complete. Final source persistence and APK distribution recovery are in progress.**
 
-Current user request (2026-10-06 JST): replace shallow polymer explanations with source-grounded deeper instruction, many exercises and diagrams. Implemented: 40 deep lessons, 40 worked examples, 180 new exercises, 44 exact vector diagrams (29 instructional / 15 neutral exercise variants). Source pack totals are 13 units / 123 nodes / 365 questions / 27 reactions. All prior 114 node IDs and 185 grading contracts remain stable.
+Current request: deepen shallow polymer instruction using researched information, many exercises and diagrams. Implemented: 40 deep lessons, 40 worked examples, 180 new original exercises, 44 vector diagrams (29 instructional / 15 neutral exercise variants). Deep scope includes 232 questions across sugars/proteins/synthetic polymers/fibers/integrated topics. Pack totals: 13 units / 123 nodes / 365 questions / 27 reactions. Prior 114 node IDs and 185 answer contracts remain stable.
 
-Verified for this revision: TypeScript and content validation; 20 core tests (including all 56 new numeric answers independently computed and legacy SQL update preservation); Web export; 13 phone-width UI scenarios with zero page errors; all 44 drawings / 264 text elements checked for glyph clipping. The diagram check prompted a correction to PET/nylon bond labels. Native APK rebuild/inspection and remote completion remain pending; v0.1.0 evidence below is historical.
+Verified: typecheck/content validation, 20 core tests, all 56 new numeric answers independently calculated, deterministic regeneration, Web export, 13 phone-width scenarios with no page errors, 44 drawings / 265 text elements with no clipping. Full Android build and final incremental build succeeded; final APK inspection matched all 9 sourcemap sources, embedded 123 nodes / 365 questions / 44 diagrams, native SVG/SQLite, offline manifest and prior release certificate. See [release verification](docs/RELEASE_VALIDATION.md).
 
-Research facts inform original instruction, diagrams and exercises; external text, figures and exam questions are not bulk-republished. See [POLYMER_CONTENT.md](docs/POLYMER_CONTENT.md). Runtime source changes are complete and the following work is verification/distribution.
+Local verified APK SHA-256: `010c9c3c0c4c42a87c45cefe3b55e0af1b339aabd8ed8db8ceeae083376a7131`, 30,423,238 bytes. The executor disconnected after inspection, before artifact saving was confirmed. Source/content checkpoint `6497e73` is durable on `work/polymer-depth-20261006`; final 2 diagram changes were recovered with an exact final pack byte count of 863,543. Do not claim the new APK is available until a persistent download is verified. No physical-device execution or upgrade test has been performed.
 
-GitHub `main` is the canonical project storage and now contains the implementation, content and documents. The original release run began with `main` at `f97fae8`, containing five design documents and no app code. That run produced the app, original content, validation tools and a standalone Android APK.
+Research informs original text, figures and exercises; external content is not bulk-republished. Source provenance and the educational scope are in [POLYMER_CONTENT.md](docs/POLYMER_CONTENT.md). GitHub `main` remains the canonical storage; [PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1) integrated the earlier v0.1.0.
 
-Integration is complete: [PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1) was merged into `main` on 2026-10-06 JST with explicit user authorization. Merge commit: `7d2e53802b7ecde342ca2792cff4c87455bbfe9e`. The validated implementation checkpoint is `d3fb0d0`. APK and ZIP deliverables remain saved separately from Git-backed source; this integration did not change or rebuild the application.
+## Historical v0.1.0 implementation and verification
 
-This is a first usable distribution with broad introductory organic/polymer coverage. It is not a completed difficult-university preparation curriculum, a peer-reviewed chemistry textbook, or a device-tested production release. No background execution after the conversation ends is promised.
+The following records refer to the prior release. They do not supersede the v0.2.0 evidence above.
 
 ## Implemented
 
