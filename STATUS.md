@@ -4,7 +4,7 @@ Last updated: 2026-10-06 UTC
 
 ## Current phase
 
-**Polymer v0.2.0 is implemented, verified and integrated. Trial APK distribution is being preserved.**
+**Polymer v0.2.0 is implemented, verified and integrated. Verified trial APK and installation ZIP are available.**
 
 The shallow polymer instruction has been expanded to 40 deep lessons, 40 worked examples, 180 new original exercises and 44 vector diagrams (29 instructional / 15 neutral exercise variants). The deep scope contains 232 questions across natural and synthetic polymers, proteins, fibers and integrated applications. The complete pack contains 13 units / 123 nodes / 365 questions / 27 reactions. All prior 114 node IDs and 185 answer contracts remain stable.
 
@@ -27,9 +27,11 @@ The disconnected environment's APK was inspected at 2026-10-06T00:13:43Z: 30,423
 
 ## Integration and distribution
 
-GitHub `main` is canonical. [PR #2](https://github.com/kana-hebi/kanahebi-Study-app/pull/2) integrates this revision; merged with expected head `b6a6b62`; merge SHA: `edea1cfba2892225b280da18d331b3cce737ff1a`. APK/ZIP are retained in the successful build artifact; a repository trial release is now being created to keep the download available beyond temporary Actions retention.
+GitHub `main` is canonical. [PR #2](https://github.com/kana-hebi/kanahebi-Study-app/pull/2) integrates this revision; merged with expected head `b6a6b62`; merge SHA: `edea1cfba2892225b280da18d331b3cce737ff1a`. The verified APK and installation ZIP are available in [the v0.2.0 trial release](https://github.com/kana-hebi/kanahebi-Study-app/releases/tag/v0.2.0). Release preservation run `37395666240` succeeded and the public asset SHA-256/size exactly match the inspected build. The temporary Actions artifact is not the only copy.
 
 The build workflow uses standard Ubuntu and pinned official actions. Repository release preservation verifies the successful run ID/head SHA, APK/ZIP bytes, signature identity and embedded content before upload. No signing secret or learner data is committed.
+
+Downloads: [APK](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-arm64.apk) · [ZIP with instructions](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-android.zip). Application ID `lab.kanahebi.study`, Android arm64, minSDK 24, version 0.2.0/code 2, test certificate matching v0.1.0. Release tag targets `870bf960eb6a27dcf17c42b2d49ddff02802f674`; its app/content sources are unchanged from the verified build commit.
 
 ## Limits and remaining acceptance
 

@@ -1,0 +1,21 @@
+{
+  "releaseTag": "v0.2.0",
+  "releaseUrl": "https://github.com/kana-hebi/kanahebi-Study-app/releases/tag/v0.2.0",
+  "apkUrl": "https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-arm64.apk",
+  "zipUrl": "https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-android.zip",
+  "preservationRunId": 37395666240,
+  "preservationJobId": 112050897290,
+  "preservationConclusion": "success",
+  "buildRunId": 37394795361,
+  "buildSourceCommit": "b6a6b62dc222ce7940e7bedadb623afa750bcd48",
+  "mergeCommit": "edea1cfba2892225b280da18d331b3cce737ff1a",
+  "releaseTagTarget": "870bf960eb6a27dcf17c42b2d49ddff02802f674",
+  "apkSha256": "41e425317975ed5f5e844ba436604d9f60d58fc8c759c7dcb10d6ac6563bf090",
+  "apkBytes": 30423238,
+  "zipSha256": "5f6dabe2e943f2e0035470303fa6fec165c7d6f7ad60e9fa96aaabfbbb2a5f74",
+  "zipBytes": 15886438,
+  "publishedAt": "2026-10-06T00:45:47Z",
+  "releaseAssetDigestAndSizeMatched": true,
+  "deviceExecutionTested": false,
+  "onDeviceUpgradeTested": false
+}

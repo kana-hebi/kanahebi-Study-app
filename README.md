@@ -15,7 +15,7 @@ React Native + Expo SDK 57 + TypeScriptで実装を開始しました。Android�
 
 高分子は一次資料で事実を確認し、基礎から複数の知識を使う演習まで広げました。[収録範囲・教材の作り方](docs/POLYMER_CONTENT.md)で内容を確認できます。有機化学の他範囲は導入・基本演習のままです。教材の第三者校閲、入試への十分な適合性、長期的な学習モデルの評価は今後の課題です。
 
-Android v0.2.0の試用APKはビルドと検査を完了しました。配布保存中に作業環境が切断したため、GitHubから再ビルドして配布できる経路を用意します。[使い方](docs/USER_GUIDE.md)と[検証記録](docs/RELEASE_VALIDATION.md)を用意しています。完了したビルドと実機未確認の区別は `STATUS.md` を参照してください。ソースと教材はGitHubで管理し、配布バイナリは別成果物として渡します。
+Android v0.2.0の試用APKはビルドと検査を完了し、[APK](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-arm64.apk)・[導入手順入りZIP](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-android.zip)を配布しています。ホームの「高分子の教材を読む」「高分子の演習を選ぶ」から試せます。[使い方](docs/USER_GUIDE.md)と[検証記録](docs/RELEASE_VALIDATION.md)を用意しています。完了したビルドと実機未確認の区別は `STATUS.md` を参照してください。ソースと教材はGitHubで管理し、配布バイナリは別成果物として渡します。
 
 ### 開発・検証
 

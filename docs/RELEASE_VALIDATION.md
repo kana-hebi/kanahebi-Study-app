@@ -35,7 +35,7 @@ SHA-256: `41e425317975ed5f5e844ba436604d9f60d58fc8c759c7dcb10d6ac6563bf090`。
 
 release構成、アプリID `lab.kanahebi.study`、versionCode 2、minSDK 24、targetSDK 36。開発サーバー不要のHermesプログラムと教材を内蔵する。INTERNET等の不要な権限を宣言せず、Expo updates無効、allowBackup=false。署名は試用向けのAndroid Debug証明書で、ストア用の鍵を公開していない。
 
-ローカル検査直後に作業環境が切断したため、同じ最終教材をGitHubで再検証・再ビルドした。[実行 37394795361](https://github.com/kana-hebi/kanahebi-Study-app/actions/runs/37394795361) が成功（340タスク、6分39秒）。20件のテスト・教材の再生成一致・APK検査・ZIPの展開後ハッシュ一致まで確認した。配布ZIPは15,886,438 bytes、SHA-256 `5f6dabe2e943f2e0035470303fa6fec165c7d6f7ad60e9fa96aaabfbbb2a5f74`。この配布版と先行ローカルビルドのバイナリハッシュは異なり、この文書は実際に配布するGitHub版を記録している。配布の現在地点はSTATUS.mdだけで管理する。
+ローカル検査直後に作業環境が切断したため、同じ最終教材をGitHubで再検証・再ビルドした。[実行 37394795361](https://github.com/kana-hebi/kanahebi-Study-app/actions/runs/37394795361) が成功（340タスク、6分39秒）。20件のテスト・教材の再生成一致・APK検査・ZIPの展開後ハッシュ一致まで確認した。配布ZIPは15,886,438 bytes、SHA-256 `5f6dabe2e943f2e0035470303fa6fec165c7d6f7ad60e9fa96aaabfbbb2a5f74`。この配布版と先行ローカルビルドのバイナリハッシュは異なり、この文書は実際に配布するGitHub版を記録している。[v0.2.0の配布ページ](https://github.com/kana-hebi/kanahebi-Study-app/releases/tag/v0.2.0)にAPKとZIPを保存し、公開assetのサイズ・SHA-256が上記の検査値と一致することも確認した。配布の現在地点はSTATUS.mdだけで管理する。
 
 切断前に最終実行ログと画像は作業領域へ生成済みだったが、Gitへ保存できたPNGは直前のレビュー版。上記のコア・図・画面の最終結果は観測結果から復元した要約であり、保存済み画像が最後の2図修正を示すとは主張しない。
 

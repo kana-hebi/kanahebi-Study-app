@@ -2,7 +2,7 @@
 
 ## Androidで始める
 
-インストール用ファイルは `kanahebi-study-0.2.0-arm64.apk`。Pixel 9aなどのarm64 Android向けです。配布APKがある場合はスマホへ保存し、Androidのファイルアプリから開きます。Androidが求めた場合に限り、そのファイルを開くアプリからのインストールを許可してください。初版は試用署名で、ストア配布版ではありません。
+インストール用ファイルは [kanahebi-study-0.2.0-arm64.apk](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-arm64.apk)。[ZIP（導入手順・検査記録入り）](https://github.com/kana-hebi/kanahebi-Study-app/releases/download/v0.2.0/kanahebi-study-0.2.0-android.zip)からも入手できます。Pixel 9aなどのarm64 Android向けです。配布APKがある場合はスマホへ保存し、Androidのファイルアプリから開きます。Androidが求めた場合に限り、そのファイルを開くアプリからのインストールを許可してください。初版は試用署名で、ストア配布版ではありません。
 
 起動後はアカウント、PC、開発サーバー、初回の教材ダウンロードを使わずに学習する構成です。有機・高分子の教材は同梱しています。実機での確認項目と検証済みの範囲は [RELEASE_VALIDATION.md](RELEASE_VALIDATION.md) を参照してください。
 
