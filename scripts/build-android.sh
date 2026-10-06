@@ -11,5 +11,7 @@ cd android
 ./gradlew --no-daemon --max-workers=2 assembleRelease -PreactNativeArchitectures=arm64-v8a
 cd ..
 mkdir -p artifacts
-cp android/app/build/outputs/apk/release/app-release.apk artifacts/kanahebi-study-0.1.0-arm64.apk
-echo 'Standalone arm64 test-signed APK: artifacts/kanahebi-study-0.1.0-arm64.apk'
+study_version="$(node -p 'require("./app.json").expo.version')"
+study_apk="artifacts/kanahebi-study-${study_version}-arm64.apk"
+cp android/app/build/outputs/apk/release/app-release.apk "$study_apk"
+echo "Standalone arm64 test-signed APK: $study_apk"

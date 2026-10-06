@@ -9,6 +9,8 @@ import { openRepository } from './src/data/repository';
 import { exportJson, importJson } from './src/data/io';
 import { Button, C, Card, confirm, Filters, Heading, modeLabels, notify, ProgressBar, s, stateLabels, Tag } from './src/ui/kit';
 import { QuestionScreen, ReactionCard, Results, Running } from './src/ui/Session';
+import { LessonBlocks, SourceNotes } from './src/ui/Lesson';
+import { lessonSearchText } from './src/domain/lesson';
 const tabs = ['ホーム', 'コース', '自由学習', '復習', 'その他'] as const;
 export default function App() { return <SafeAreaProvider><StudyApp /></SafeAreaProvider>; }
 function StudyApp() {
@@ -24,6 +26,7 @@ function StudyApp() {
   const [running, setRunning] = useState<Running | null>(null);
   const [unit, setUnit] = useState(''), [node, setNode] = useState(''), [format, setFormat] = useState(''), [difficulty, setDifficulty] = useState('');
   const [search, setSearch] = useState(''), [count, setCount] = useState('10'), [tracked, setTracked] = useState(true);
+  const [deepOnly, setDeepOnly] = useState(false);
   const refresh = () => { try { if (repo) setSnapshot(repo.read()); } catch (e) { notify(String(e)); } };
   const pack = snapshot.packs.find(p => p.manifest.packId === packId) ?? snapshot.packs[0];
   const states = useMemo(() => pack ? statesFor(pack, snapshot.attempts) : {}, [pack, snapshot.attempts]);
@@ -44,9 +47,11 @@ function StudyApp() {
   }
   const forNode = (n: KnowledgeNode, mode: Mode = 'course') => start(mode, selectQuestions(pack, { nodeId: n.id, count: 5 }, history), mode === 'free' ? tracked : true);
   const finish = () => { setRunning(null); setDetail(null); refresh(); };
-  const changePack = (id: string) => { setPackId(id); repo.setSetting('activePack', id); setUnit(''); setNode(''); setFormat(''); setDifficulty(''); setSearch(''); setDetail(null); refresh(); };
-  const freeQuestions = selectQuestions(pack, { unitId: unit || undefined, nodeId: node || undefined, kind: format || undefined, difficulty: Number(difficulty) || undefined, count: Number(count) }, history);
-  const matchingNodes = pack.nodes.filter(n => (!unit || n.unitId === unit) && (!search || (n.title + n.lesson.core).includes(search)));
+  const changePack = (id: string) => { setPackId(id); repo.setSetting('activePack', id); setUnit(''); setNode(''); setFormat(''); setDifficulty(''); setSearch(''); setDeepOnly(false); setDetail(null); refresh(); };
+  const deepIds = new Set(pack.nodes.filter(n => n.lesson.blocks?.length).map(n => n.id));
+  const freePack = deepOnly ? { ...pack, questions: pack.questions.filter(q => q.nodeIds.some(id => deepIds.has(id))) } : pack;
+  const freeQuestions = selectQuestions(freePack, { unitId: unit || undefined, nodeId: node || undefined, kind: format || undefined, difficulty: Number(difficulty) || undefined, count: Number(count) }, history);
+  const matchingNodes = pack.nodes.filter(n => (!deepOnly || deepIds.has(n.id)) && (!unit || n.unitId === unit) && (!search || lessonSearchText(n).includes(search)));
   const openNode = (n: KnowledgeNode) => { setDetail(n); setSearch(''); };
   const title = running ? modeLabels[running.session.mode] : detail ? '知識を確認' : tab;
   const prerequisites = detail?.prerequisites.filter(id => states[id]?.cleanSuccesses < 1 || states[id]?.score < .2) ?? [];
@@ -58,13 +63,18 @@ function StudyApp() {
       : detail ? <><Button title="戻る" secondary small onPress={() => setDetail(null)} /><Heading title={detail.title} detail={pack.units.find(u => u.id === detail.unitId)?.title} /><Tag color={C.mint}>{stateLabels[states[detail.id].state]}</Tag>
         {!!prerequisites.length && <Card accent={C.gold}><Text style={s.label}>先に確認すると分かりやすい知識</Text>{prerequisites.map(id => <Button key={id} title={pack.nodes.find(n => n.id === id)!.title} secondary small onPress={() => setDetail(pack.nodes.find(n => n.id === id)!)} />)}<Text style={s.caption}>前提不足でも、この知識を学べます。</Text></Card>}
         <Card><Text style={s.label}>考え方</Text><Text style={s.body}>{detail.lesson.core}</Text><Text style={s.label}>例でつなぐ</Text><Text style={s.body}>{detail.lesson.example}</Text><Text style={s.label}>間違えやすいところ</Text><Text style={s.body}>{detail.lesson.caution}</Text></Card>
+        {detail.lesson.goals && <Card accent={C.mint}><Text style={s.label}>この教材でできるようになること</Text>{detail.lesson.goals.map((g, i) => <Text key={i} style={s.body}>{i + 1}. {g}</Text>)}</Card>}
+        {detail.lesson.blocks && <LessonBlocks blocks={detail.lesson.blocks} pack={pack} />}
         <Button title="この知識を練習する" onPress={() => forNode(detail, tab === 'コース' ? 'course' : 'free')} /><Text style={s.caption}>{tab === 'コース' || tracked ? '学習記録ONで開始します' : '自由学習の記録OFFで開始します'}</Text>
         <Button title={snapshot.bookmarks.includes(detail.id) ? 'ブックマークを外す' : 'ブックマークする'} secondary onPress={() => { repo.toggleBookmark(detail.id); refresh(); }} />
+        {detail.lesson.relatedNodeIds && <Card><Text style={s.label}>つなげて読む</Text>{detail.lesson.relatedNodeIds.map(id => <Button key={id} title={pack.nodes.find(n => n.id === id)!.title} secondary onPress={() => openNode(pack.nodes.find(n => n.id === id)!)} />)}</Card>}
+        {detail.lesson.sourceIds && <SourceNotes ids={detail.lesson.sourceIds} pack={pack} />}
         </>
       : tab === 'ホーム' ? <><View style={s.hero}><Text style={s.eyebrow}>YOUR STUDY ROOM</Text><Text style={s.heroTitle}>一つずつ、{`\n`}理解をつなぐ。</Text><Text style={s.bodyMuted}>{pack.manifest.title}</Text></View>
         <View style={s.statRow}>{[[dueNodes.length, '今日の復習'], [attemptedNodes, '確認した知識'], [history.length, '記録した回答']].map(([v, label]) => <View key={label} style={s.stat}><Text style={s.statNumber}>{v}</Text><Text style={s.caption}>{label}</Text></View>)}</View>
         {recommendations[0] && <Card accent={C.mint}><Text style={s.eyebrow}>NEXT STEP</Text><Text style={s.cardTitle}>{recommendations[0].node.title}</Text><Text style={s.bodyMuted}>{recommendations[0].reason}</Text><Button title="おすすめから学ぶ" onPress={() => { setTab('コース'); openNode(recommendations[0].node); }} /></Card>}
         <Card><Text style={s.cardTitle}>自分で選ぶ、自由学習</Text><Text style={s.bodyMuted}>単元や知識、形式から。記録を切って試すこともできます。</Text><Button title="自由学習を開く" secondary onPress={() => setTab('自由学習')} /></Card>
+        {pack.nodes.some(n => n.id.endsWith('.node.polymer-foundation')) && <Card accent={C.purple}><Text style={s.eyebrow}>深く学ぶ · 高分子</Text><Text style={s.cardTitle}>構造・性質・計算をつなぐ</Text><Text style={s.bodyMuted}>図解、解き方つき例題、基礎から応用の演習をまとめて学べます。</Text><Button title="高分子の教材を読む" onPress={() => { setTab('コース'); openNode(pack.nodes.find(n => n.id.endsWith('.node.polymer-foundation'))!); }} /><Button title="高分子の演習を選ぶ" secondary onPress={() => { setTab('自由学習'); setDeepOnly(true); setUnit(''); setNode(''); setFormat(''); setDifficulty(''); setSearch(''); }} /></Card>}
         <Text style={s.sectionTitle}>今の広がり</Text><Text style={s.bodyMuted}>{pack.nodes.length}知識 · {pack.questions.length}問 · {pack.units.length}単元</Text><ProgressBar value={stable / pack.nodes.length} /><Text style={s.caption}>安定・定着 {stable}/{pack.nodes.length}。正答率とは別の目安です。</Text></>
       : tab === 'コース' ? <><Heading title="あなたの次の一歩" detail="回答と復習時期をもとにおすすめします。どの知識も自由に開けます。" />
         {recommendations.slice(0, 4).map((r, i) => <Card key={r.node.id} accent={i === 0 ? C.mint : undefined}><View style={s.row}><Text style={s.stepNumber}>{String(i + 1).padStart(2, '0')}</Text><Tag>{stateLabels[states[r.node.id].state]}</Tag></View><Text style={s.cardTitle}>{r.node.title}</Text><Text style={s.bodyMuted}>{r.reason}</Text><View style={s.row}><Button title="教材を読む" secondary small onPress={() => openNode(r.node)} /><Button title="練習する" small onPress={() => forNode(r.node)} /></View></Card>)}
@@ -73,6 +83,7 @@ function StudyApp() {
       : tab === '自由学習' ? <><Heading title="今日、学びたいところから" detail="学ぶ順序も、記録するかどうかも、自分で選べます。" />
         <Card accent={tracked ? C.mint : C.gold}><View style={s.between}><View style={{ flex: 1 }}><Text style={s.cardTitle}>学習記録 {tracked ? 'ON' : 'OFF'}</Text><Text style={s.bodyMuted}>{tracked ? '習熟度・弱点・復習に反映します' : '結果はこの学習中だけ。終了後に残しません'}</Text></View><Switch accessibilityLabel="学習記録" value={tracked} onValueChange={setTracked} trackColor={{ false: '#43505A', true: C.mint }} thumbColor={C.text} /></View></Card>
         <TextInput accessibilityLabel="知識を検索" value={search} onChangeText={setSearch} placeholder="知識・反応を検索" placeholderTextColor={C.muted} style={s.input} />
+        {deepIds.size > 0 && <><Text style={s.label}>教材の範囲</Text><Filters selected={deepOnly ? 'deep' : ''} onChange={id => { setDeepOnly(id === 'deep'); setUnit(''); setNode(''); }} options={[{ id: '', label: '全教材' }, { id: 'deep', label: `詳しい教材（${deepIds.size}知識）` }]} /></>}
         <Text style={s.label}>単元</Text><Filters selected={unit} onChange={id => { setUnit(id); setNode(''); }} options={[{ id: '', label: 'すべて' }, ...pack.units.map(u => ({ id: u.id, label: u.title }))]} />
         <Text style={s.label}>形式</Text><Filters selected={format} onChange={setFormat} options={[{ id: '', label: 'すべて' }, { id: 'choice', label: '選択' }, { id: 'text', label: '名称・式' }, { id: 'numeric', label: '計算' }]} />
         <Text style={s.label}>難易度</Text><Filters selected={difficulty} onChange={setDifficulty} options={[{ id: '', label: 'すべて' }, { id: '1', label: '基礎' }, { id: '2', label: '標準' }, { id: '3', label: '応用' }]} />
@@ -83,9 +94,9 @@ function StudyApp() {
         <Text style={s.sectionTitle}>要確認の知識</Text>{pack.nodes.filter(n => states[n.id].state === 'unstable').map(n => <Card key={n.id}><Text style={s.cardTitle}>{n.title}</Text><Text style={s.bodyMuted}>次の復習：{new Date(states[n.id].dueAt).toLocaleString('ja-JP', { month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit' })}</Text><Button title="今、復習する" secondary onPress={() => forNode(n, 'review')} /></Card>)}
         {!history.length && <Text style={s.bodyMuted}>記録ONで問題を解くと、ここに復習予定ができます。</Text>}<Text style={s.sectionTitle}>次の予定</Text>{pack.nodes.filter(n => states[n.id].attempts && states[n.id].dueAt > now).sort((a, b) => states[a.id].dueAt - states[b.id].dueAt).slice(0, 10).map(n => <Pressable key={n.id} style={s.listItem} onPress={() => openNode(n)}><Text style={s.listTitle}>{n.title}</Text><Text style={s.bodyMuted}>{new Date(states[n.id].dueAt).toLocaleDateString('ja-JP')}</Text></Pressable>)}</>
       : other === 'menu' ? <><Heading title="学びを見渡す" detail="資料・関係・記録を、必要なときに。" />{[['map', '反応マップ', '条件をたどり、知識へつなぐ'], ['reference', '資料集', '全ての知識を検索'], ['exam', '総合演習', '応用と計算をまとめて練習'], ['progress', '成績・履歴', '分野別の理解と回答を確認'], ['bookmarks', 'ブックマーク', 'もう一度読みたい知識'], ['packs', '教材パック・データ', '教材追加とバックアップ']].map(([id, t, d]) => <Pressable key={id} style={s.listItem} onPress={() => { setOther(id); setSearch(''); }}><Text style={s.listTitle}>{t} →</Text><Text style={s.bodyMuted}>{d}</Text></Pressable>)}
-        <Card><Text style={s.label}>この初版について</Text><Text style={s.bodyMuted}>全領域に導入教材を用意しています。難関大向けの十分な演習量・第三者校閲・実機検証は今後の確認項目です。</Text><Text style={s.caption}>v0.1.0 · アカウント不要 · 標準解説は端末内</Text></Card></>
+        <Card><Text style={s.label}>この教材について</Text><Text style={s.bodyMuted}>高分子は図解・詳しい解説・多段階の演習を追加しました。教材の第三者校閲と実機検証は今後の確認項目です。</Text><Text style={s.caption}>v0.2.0 · アカウント不要 · 標準解説は端末内</Text></Card></>
       : <><Button title="その他へ戻る" secondary small onPress={() => { setOther('menu'); setSearch(''); }} />
-        {other === 'reference' || other === 'bookmarks' ? <><Heading title={other === 'reference' ? '資料集' : 'ブックマーク'} /><TextInput accessibilityLabel="資料を検索" value={search} onChangeText={setSearch} style={s.input} placeholder="知識名・説明で検索" placeholderTextColor={C.muted} />{pack.nodes.filter(n => (other !== 'bookmarks' || snapshot.bookmarks.includes(n.id)) && (!search || (n.title + n.lesson.core).includes(search))).map(list)}</>
+        {other === 'reference' || other === 'bookmarks' ? <><Heading title={other === 'reference' ? '資料集' : 'ブックマーク'} /><TextInput accessibilityLabel="資料を検索" value={search} onChangeText={setSearch} style={s.input} placeholder="知識名・説明で検索" placeholderTextColor={C.muted} />{pack.nodes.filter(n => (other !== 'bookmarks' || snapshot.bookmarks.includes(n.id)) && (!search || lessonSearchText(n).includes(search))).map(list)}</>
         : other === 'map' ? <><Heading title="反応をたどる" detail="条件を隠して思い出したり、関連する知識を練習できます。" />{pack.reactions.length ? pack.reactions.map(r => <ReactionCard key={r.id} reaction={r} onLearn={() => openNode(pack.nodes.find(n => n.id === r.nodeId)!)} onExercise={() => forNode(pack.nodes.find(n => n.id === r.nodeId)!, 'free')} />) : <Text style={s.bodyMuted}>この教材に反応マップはありません。</Text>}</>
         : other === 'exam' ? <><Heading title="総合演習" detail="初版のオリジナル問題です。実際の過去問や時間制限模試の再現ではありません。" /><Card><Text style={s.body}>応用と計算を横断して、条件から答えを組み立てます。</Text><Button title="総合10問を始める" onPress={() => start('exam', selectQuestions({ ...pack, questions: pack.questions.filter(q => q.difficulty >= 2) }, { count: 10 }, history))} /></Card></>
         : other === 'progress' ? <><Heading title="成績・履歴" detail="習熟度推定は説明可能なルールによる目安です。" /><Card><Text style={s.body}>{history.filter(a => a.firstOutcome === 'correct' && !a.hintsUsed && !a.revealed).length} 無補助の正答 / {history.length} 回答</Text><Text style={s.bodyMuted}>未想起 {history.filter(a => a.firstOutcome === 'unknown').length}件 · ヒント使用 {history.filter(a => a.hintsUsed > 0).length}件</Text></Card>

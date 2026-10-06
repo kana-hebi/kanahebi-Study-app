@@ -30,12 +30,56 @@ export function validatePack(value: unknown): ContentPack {
       || (s.url !== undefined && (!str(s.url) || !/^https:\/\//.test(s.url)))) fail('出典が不正です');
     sources.add(s.id);
   }
+  const refs = (v: any) => strings(v) && v.length > 0 && new Set(v).size === v.length && v.every(id => sources.has(id));
+  const diagrams = new Set<string>();
+  const colors = ['text', 'muted', 'mint', 'purple', 'gold', 'red'];
+  if (p.diagrams !== undefined) {
+    if (!Array.isArray(p.diagrams) || p.diagrams.length > 500 || !m.requiredCapabilities.includes('render.vectorDiagram.v1')) fail('図解機能/サイズが不正です');
+    for (const d of p.diagrams) {
+      if (!object(d) || !str(d.id) || !d.id.startsWith(m.packId + '.') || diagrams.has(d.id)
+        || !str(d.title) || !str(d.description) || !refs(d.sourceIds)
+        || !Number.isFinite(d.width) || d.width < 240 || d.width > 1200
+        || !Number.isFinite(d.height) || d.height < 80 || d.height > 1600
+        || !Array.isArray(d.elements) || !d.elements.length || d.elements.length > 200) fail('図解が不正です');
+      const x = (v: any) => Number.isFinite(v) && v >= 0 && v <= d.width;
+      const y = (v: any) => Number.isFinite(v) && v >= 0 && v <= d.height;
+      for (const e of d.elements) {
+        if (!object(e) || (e.color !== undefined && !colors.includes(e.color)) || (e.dashed !== undefined && typeof e.dashed !== 'boolean')) fail('図解要素が不正です');
+        if (e.type === 'text') { if (!x(e.x) || !y(e.y) || !str(e.text) || e.text.length > 100 || /[\r\n]/.test(e.text)
+          || (e.size !== undefined && (!Number.isFinite(e.size) || e.size < 12 || e.size > 32))
+          || (e.align !== undefined && !['start', 'middle', 'end'].includes(e.align))) fail('図解文字が不正です'); }
+        else if (e.type === 'line') { if (!x(e.x1) || !x(e.x2) || !y(e.y1) || !y(e.y2)) fail('図解の線が不正です'); }
+        else if (e.type === 'polyline') { if (!Array.isArray(e.points) || e.points.length < 2 || e.points.length > 100 || e.points.some((pt: any) => !Array.isArray(pt) || pt.length !== 2 || !x(pt[0]) || !y(pt[1]))) fail('図解の折れ線が不正です'); }
+        else if (e.type === 'rect') { if (!x(e.x) || !y(e.y) || !(e.width > 0) || !(e.height > 0) || !x(e.x + e.width) || !y(e.y + e.height)) fail('図解の矩形が不正です'); }
+        else if (e.type === 'ellipse') { if (!(e.rx > 0) || !(e.ry > 0) || !x(e.cx - e.rx) || !x(e.cx + e.rx) || !y(e.cy - e.ry) || !y(e.cy + e.ry)) fail('図解の楕円が不正です'); }
+        else fail('未対応の図解要素です');
+      }
+      diagrams.add(d.id);
+    }
+  }
+  const diagramRef = (id: any) => str(id) && diagrams.has(id);
+  const blocks = (v: any) => {
+    if (!Array.isArray(v) || !v.length || v.length > 40 || !m.requiredCapabilities.includes('render.lessonBlocks.v1')) fail('詳細教材機能/サイズが不正です');
+    for (const b of v) {
+      if (!object(b)) fail('詳細教材が不正です');
+      if (b.type === 'diagram') { if (!diagramRef(b.diagramId)) fail('図解の参照が不正です'); }
+      else if (!str(b.heading)) fail('教材見出しが不正です');
+      else if (b.type === 'paragraph') { if (!str(b.body)) fail('教材本文が不正です'); }
+      else if (b.type === 'table') { if (!strings(b.columns) || b.columns.length < 2 || b.columns.length > 5 || !Array.isArray(b.rows) || !b.rows.length || b.rows.length > 30 || b.rows.some((r: any) => !strings(r) || r.length !== b.columns.length)) fail('比較表が不正です'); }
+      else if (b.type === 'worked') { if (!str(b.prompt) || !strings(b.steps) || !b.steps.length || b.steps.length > 12 || !str(b.answer) || (b.diagramId !== undefined && !diagramRef(b.diagramId))) fail('例題が不正です'); }
+      else fail('未対応の教材ブロックです');
+    }
+  };
   for (const u of p.units) if (!str(u.title) || !str(u.summary) || !Number.isInteger(u.stage) || u.stage < 0) fail('単元が不正です');
   const graph = new Map<string, string[]>();
   for (const n of p.nodes) {
     if (!units.has(n.unitId) || !str(n.title) || !str(n.dimension) || !strings(n.prerequisites)
       || n.prerequisites.some((id: string) => !nodes.has(id)) || !object(n.lesson)
       || !['core', 'example', 'caution'].every(k => str(n.lesson[k]))) fail('知識ノードが不正です');
+    if (n.lesson.goals !== undefined && (!strings(n.lesson.goals) || !n.lesson.goals.length || n.lesson.goals.length > 8)) fail('到達目標が不正です');
+    if (n.lesson.sourceIds !== undefined && !refs(n.lesson.sourceIds)) fail('教材の出典参照が不正です');
+    if (n.lesson.relatedNodeIds !== undefined && (!strings(n.lesson.relatedNodeIds) || n.lesson.relatedNodeIds.length > 8 || n.lesson.relatedNodeIds.some((id: string) => id === n.id || !nodes.has(id)))) fail('関連教材の参照が不正です');
+    if (n.lesson.blocks !== undefined) blocks(n.lesson.blocks);
     graph.set(n.id, n.prerequisites);
   }
   const visiting = new Set<string>(), done = new Set<string>();
@@ -46,6 +90,9 @@ export function validatePack(value: unknown): ContentPack {
     if (!strings(q.nodeIds) || !q.nodeIds.length || new Set(q.nodeIds).size !== q.nodeIds.length || q.nodeIds.some((id: string) => !nodes.has(id))
       || !str(q.prompt) || ![1, 2, 3].includes(q.difficulty) || !strings(q.hints) || q.hints.length < 2
       || !str(q.explanation) || !sources.has(q.sourceId)) fail('問題の参照/説明が不正です');
+    if (q.sourceIds !== undefined && !refs(q.sourceIds)) fail('問題の出典参照が不正です');
+    if (q.diagramId !== undefined && !diagramRef(q.diagramId)) fail('問題の図解参照が不正です');
+    if (q.explanationBlocks !== undefined) blocks(q.explanationBlocks);
     const capability = q.kind === 'choice' ? 'question.multipleChoice.v1' : q.kind === 'text' ? 'question.textInput.v1' : 'question.numericInput.v1';
     if (!m.requiredCapabilities.includes(capability)) fail('問題形式のcapabilityが宣言されていません');
     if (q.kind === 'choice') {

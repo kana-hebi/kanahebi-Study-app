@@ -43,10 +43,10 @@ test('unknown then hint-assisted success remains one failed first-recall record'
 });
 test('failed native pack replacement is atomic and preserves learner data', () => {
   const { repo, db } = repository(), session = makeSession(pack.manifest.packId, 'free'); repo.saveAttempt(session, event(session)); const before = repo.read();
-  const bad = structuredClone(pack); bad.manifest.packVersion = '0.2.0'; bad.nodes.shift();
+  const bad = structuredClone(pack); bad.manifest.packVersion = '0.2.1'; bad.nodes.shift();
   assert.throws(() => repo.install(bad)); assert.deepEqual(repo.read(), before);
-  const newer = structuredClone(pack); newer.manifest.packVersion = '0.2.0'; newer.manifest.description += ' 更新'; repo.install(newer);
-  assert.equal(repo.read().attempts.length, 1); assert.equal(repo.read().packs[0].manifest.packVersion, '0.2.0'); assert.throws(() => repo.install(pack), /古い/); db.close();
+  const newer = structuredClone(pack); newer.manifest.packVersion = '0.2.1'; newer.manifest.description += ' 更新'; repo.install(newer);
+  assert.equal(repo.read().attempts.length, 1); assert.equal(repo.read().packs[0].manifest.packVersion, '0.2.1'); assert.throws(() => repo.install(pack), /古い/); db.close();
 });
 test('pack validation rejects cyclic prerequisites, nonexistent answers and unsupported capabilities', () => {
   const bad = structuredClone(pack); bad.nodes[0].prerequisites = [bad.nodes[1].id]; assert.throws(() => validatePack(bad), /循環/);
