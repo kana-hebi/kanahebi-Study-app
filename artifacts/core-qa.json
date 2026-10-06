@@ -3,7 +3,9 @@
   "command": "npm test",
   "passed": 20,
   "failed": 0,
-  "evidence": "Observed on final content before execution environment disconnected; this summary was recovered after disconnection.",
+  "evidence": "GitHub job 112048080161, successful build 37394795361",
+  "sourceCommit": "b6a6b62dc222ce7940e7bedadb623afa750bcd48",
+  "regenerationMatched": true,
   "coverage": [
     "14 existing core tests",
     "56 independent numeric answer checks",

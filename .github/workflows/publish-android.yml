@@ -1,0 +1,95 @@
+name: Preserve verified Android release
+
+on:
+  push:
+    branches: [main]
+    paths: [.github/workflows/publish-android.yml]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: publish-android-v0.2.0
+  cancel-in-progress: false
+
+jobs:
+  preserve-release:
+    if: github.repository == 'kana-hebi/kanahebi-Study-app'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: write
+    env:
+      GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      STUDY_RUN_ID: "37394795361"
+      STUDY_SOURCE_SHA: b6a6b62dc222ce7940e7bedadb623afa750bcd48
+    steps:
+      - name: Check the successful source build
+        shell: bash
+        run: |
+          gh run view "$STUDY_RUN_ID" --repo "$GITHUB_REPOSITORY" --json conclusion,headSha > "$RUNNER_TEMP/study-build.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          run = json.loads((Path(os.environ['RUNNER_TEMP']) / 'study-build.json').read_text())
+          assert run['conclusion'] == 'success'
+          assert run['headSha'] == os.environ['STUDY_SOURCE_SHA']
+          PY
+      - name: Download the exact verified artifact
+        shell: bash
+        run: |
+          gh run download "$STUDY_RUN_ID" --repo "$GITHUB_REPOSITORY" --name kanahebi-study-android --dir "$RUNNER_TEMP/study-release"
+      - name: Recheck bytes before publishing the trial release
+        shell: bash
+        run: |
+          python - <<'PY'
+          import hashlib, json, os, zipfile
+          from pathlib import Path
+          folder = Path(os.environ['RUNNER_TEMP']) / 'study-release'
+          report = json.loads((folder / 'android-apk-validation.json').read_text())
+          distribution = json.loads((folder / 'distribution.json').read_text())
+          apk = folder / 'kanahebi-study-0.2.0-arm64.apk'
+          archive = folder / 'kanahebi-study-0.2.0-android.zip'
+          assert report['file'] == apk.name and distribution['file'] == archive.name
+          assert report['applicationId'] == 'lab.kanahebi.study'
+          assert report['versionName'] == '0.2.0' and report['versionCode'] == 2
+          assert report['certificateSha256'] == 'fac61745dc0903786fb9ede62a962b399f7348f0bb6f899b8332667591033b9c'
+          assert report['bundledNodes'] == 123 and report['bundledQuestions'] == 365 and report['bundledDiagrams'] == 44
+          assert len(report['bundledSourcesMatched']) == 9
+          assert report['nativeSvgComponents'] and report['sqliteNativeLibrary']
+          assert not report['debuggable'] and not report['updatesEnabled'] and not report['allowBackup']
+          assert apk.stat().st_size == report['bytes']
+          assert hashlib.sha256(apk.read_bytes()).hexdigest() == report['sha256'] == distribution['apkSha256']
+          assert archive.stat().st_size == distribution['bytes']
+          assert hashlib.sha256(archive.read_bytes()).hexdigest() == distribution['sha256']
+          with zipfile.ZipFile(archive) as z:
+              assert z.testzip() is None
+              assert hashlib.sha256(z.read(apk.name)).hexdigest() == report['sha256']
+          notes = (
+              '高分子の詳しい教材40項目、解き方付き例題40題、新規演習180問、図44点。'
+              '構造・性質・反応・計算、比較表、段階ヒント、関連教材、図の拡大と本文検索を収録。\n\n'
+              'Android arm64向け試用版。APKを保存してAndroidのファイルアプリから開いてください。'
+              'ZIPには同じAPK、導入手順と検査記録が入っています。PC・アカウント・開発サーバー不要の構成です。\n\n'
+              '型検査、20コアテスト、教材の再生成一致、Androidビルド、APK/ZIP/署名と9ソースの一致を確認。'
+              'ブラウザでスマホ幅の13操作シナリオと44図を確認しました。'
+              '実機起動・更新インストール・機内モードでの初回起動は未確認です。\n\n'
+              f"APK SHA-256: `{report['sha256']}`\n\n"
+              f"Build: https://github.com/{os.environ['GITHUB_REPOSITORY']}/actions/runs/{os.environ['STUDY_RUN_ID']}\n"
+              f"Source: `{os.environ['STUDY_SOURCE_SHA']}`\n"
+          )
+          (folder / 'RELEASE_NOTES.md').write_text(notes)
+          print(json.dumps({'apkSha256': report['sha256'], 'zipSha256': distribution['sha256']}, indent=2))
+          PY
+      - name: Save APK and instructions as a repository trial release
+        shell: bash
+        run: |
+          gh release create v0.2.0 \
+            "$RUNNER_TEMP/study-release/kanahebi-study-0.2.0-arm64.apk" \
+            "$RUNNER_TEMP/study-release/kanahebi-study-0.2.0-android.zip" \
+            "$RUNNER_TEMP/study-release/android-apk-validation.json" \
+            "$RUNNER_TEMP/study-release/distribution.json" \
+            --repo "$GITHUB_REPOSITORY" --target "$GITHUB_SHA" \
+            --title "かなへび学習室 v0.2.0：高分子教材の拡充" --prerelease \
+            --notes-file "$RUNNER_TEMP/study-release/RELEASE_NOTES.md"

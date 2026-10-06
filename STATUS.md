@@ -4,73 +4,44 @@ Last updated: 2026-10-06 UTC
 
 ## Current phase
 
-**Polymer v0.2.0 implementation, content, automated verification and native build/inspection are complete. Final source persistence and APK distribution recovery are in progress.**
+**Polymer v0.2.0 is implemented, verified and integrated. Trial APK distribution is being preserved.**
 
-Current request: deepen shallow polymer instruction using researched information, many exercises and diagrams. Implemented: 40 deep lessons, 40 worked examples, 180 new original exercises, 44 vector diagrams (29 instructional / 15 neutral exercise variants). Deep scope includes 232 questions across sugars/proteins/synthetic polymers/fibers/integrated topics. Pack totals: 13 units / 123 nodes / 365 questions / 27 reactions. Prior 114 node IDs and 185 answer contracts remain stable.
-
-Verified: typecheck/content validation, 20 core tests, all 56 new numeric answers independently calculated, deterministic regeneration, Web export, 13 phone-width scenarios with no page errors, 44 drawings / 265 text elements with no clipping. Full Android build and final incremental build succeeded; final APK inspection matched all 9 sourcemap sources, embedded 123 nodes / 365 questions / 44 diagrams, native SVG/SQLite, offline manifest and prior release certificate. See [release verification](docs/RELEASE_VALIDATION.md).
-
-Local verified APK SHA-256: `010c9c3c0c4c42a87c45cefe3b55e0af1b339aabd8ed8db8ceeae083376a7131`, 30,423,238 bytes. The executor disconnected after inspection, before artifact saving was confirmed. Source/content checkpoint `6497e73` is durable on `work/polymer-depth-20261006`; final 2 diagram changes were recovered with an exact final pack byte count of 863,543. Do not claim the new APK is available until a persistent download is verified. No physical-device execution or upgrade test has been performed.
-
-Research informs original text, figures and exercises; external content is not bulk-republished. Source provenance and the educational scope are in [POLYMER_CONTENT.md](docs/POLYMER_CONTENT.md). GitHub `main` remains the canonical storage; [PR #1](https://github.com/kana-hebi/kanahebi-Study-app/pull/1) integrated the earlier v0.1.0.
-
-## Historical v0.1.0 implementation and verification
-
-The following records refer to the prior release. They do not supersede the v0.2.0 evidence above.
+The shallow polymer instruction has been expanded to 40 deep lessons, 40 worked examples, 180 new original exercises and 44 vector diagrams (29 instructional / 15 neutral exercise variants). The deep scope contains 232 questions across natural and synthetic polymers, proteins, fibers and integrated applications. The complete pack contains 13 units / 123 nodes / 365 questions / 27 reactions. All prior 114 node IDs and 185 answer contracts remain stable.
 
 ## Implemented
 
-- React Native 0.86.3 / Expo SDK 57 / TypeScript; Android learner storage uses SQLite. The core design requires no account or backend.
-- Home / Course / Free Study / Review / Other; guided recommendations and prerequisite advice without access locks.
-- Unit/knowledge/format/difficulty/count filtering; Free recording defaults ON and is fixed at session start. OFF attempts never access persistence.
-- Choice/text/numeric grading; unknown, staged hints, explanations and initial-recall preservation after help.
-- Local review, reference search, reaction relationships, bookmarks, unit progress and recent attempts.
-- Developer-authored native JSON pack import/update and explicit local backup export/restore, validated before atomic replacement.
-- Organic/polymer pack: 13 units, 114 nodes, 185 original questions (114 choice, 57 text, 14 numeric), 18 reactions, stages 0–7.
-- Separate math pack: one node, three linear-equation numeric questions; same app engine.
-- Standalone arm64 APK: `kanahebi-study-0.1.0-arm64.apk`, package `lab.kanahebi.study`, version 0.1.0/code 1, min SDK 24, target SDK 36. Release configuration with a test certificate; not a store production signature.
-- Final Android manifest: allowBackup=false, no INTERNET/overlay/vibration/generic external-storage permissions, Expo updates disabled. File selection/share uses platform document mechanisms.
+- Learning goals, detailed explanation, comparison tables, hidden-solution worked examples, source notes, related lessons and full lesson search.
+- Offline vector diagrams with expanded views, question diagrams that omit answer labels, and rich feedback.
+- Home links to polymer reading and cross-unit exercise selection; 40-topic scope resets safely on pack switch and backup restore.
+- Original instructional progression from structures to properties, reaction/recovery, finite-chain and substitution calculations, and mixed problems.
+- Generic declarative pack capabilities preserve other subjects and older plain packs.
+- Free recording defaults ON; OFF leaves no learner writes. Explicit unknown remains first-recall evidence after assistance.
 
-## Verified evidence
+## Verification
 
-| Check | Result and scope |
-|---|---|
-| TypeScript | `npm run typecheck` passed |
-| Content | `npm run validate:content` passed schema, capabilities, unique IDs, references, acyclic prerequisites, exercise coverage, hints and explanations |
-| Core behavior | `npm test`: 14 passed; Node SQLite executes actual SQL, restart, OFF zero writes, unknown preservation, atomic updates/restore, subject separation and independent chemistry calculations |
-| Browser export | `npm run export:web` passed |
-| Phone-width interactions | 8 passed at 412×892; no page errors; OFF storage, assisted unknown, reload, preloaded offline learning, reaction toggle, math import and backup roundtrip |
-| Android build | Final Gradle BUILD SUCCESSFUL, 299 tasks; native components and embedded JS compiled |
-| APK inspection | Signature v2, ZIP integrity, ABI/SDK/manifest, SQLite library, embedded bundle, all 114 node and 185 question IDs verified |
-| Source correspondence | App, engine, native repository, native I/O and organic pack in build sourcemap match current source |
-| Native device execution | **Not performed**: install, offline cold start, Expo SQLite reopen, keyboard/Back, native picker/share and reboot remain unchecked |
+Typecheck and content validation, 20 core tests (including all 56 new numeric answers independently calculated and legacy SQLite/browser upgrade preservation), deterministic regeneration, Web export, 13 phone-width operation scenarios, 44 diagrams / 265 text elements without clipping, full native build and final incremental build all passed in the work environment. Final observed summaries were recovered after an executor disconnect; stored PNGs are the preceding review snapshots.
 
-Evidence and limits: [docs/RELEASE_VALIDATION.md](docs/RELEASE_VALIDATION.md), [artifacts/web-qa.json](artifacts/web-qa.json), [artifacts/android-apk-validation.json](artifacts/android-apk-validation.json). Browser storage is not native SQLite; compilation is not device execution.
+GitHub build `37394795361` uses source `b6a6b62dc222ce7940e7bedadb623afa750bcd48` and independently runs typecheck, content validation, 20 tests, generation consistency, Android build and APK/ZIP inspection. It completed successfully on 2026-10-06T00:42:57Z: 340 executed native tasks, all checks passed. The verified distribution APK is 30,423,238 bytes, SHA-256 `41e425317975ed5f5e844ba436604d9f60d58fc8c759c7dcb10d6ac6563bf090`; ZIP is 15,886,438 bytes, SHA-256 `5f6dabe2e943f2e0035470303fa6fec165c7d6f7ad60e9fa96aaabfbbb2a5f74`.
+
+The disconnected environment's APK was inspected at 2026-10-06T00:13:43Z: 30,423,238 bytes, SHA-256 `010c9c3c0c4c42a87c45cefe3b55e0af1b339aabd8ed8db8ceeae083376a7131`. Its direct artifact save was not confirmed. That hash must not be assigned to a separate GitHub build.
+
+## Integration and distribution
+
+GitHub `main` is canonical. [PR #2](https://github.com/kana-hebi/kanahebi-Study-app/pull/2) integrates this revision; merged with expected head `b6a6b62`; merge SHA: `edea1cfba2892225b280da18d331b3cce737ff1a`. APK/ZIP are retained in the successful build artifact; a repository trial release is now being created to keep the download available beyond temporary Actions retention.
+
+The build workflow uses standard Ubuntu and pinned official actions. Repository release preservation verifies the successful run ID/head SHA, APK/ZIP bytes, signature identity and embedded content before upload. No signing secret or learner data is committed.
+
+## Limits and remaining acceptance
+
+Physical-device execution and v0.1.0-to-v0.2.0 installation have not been tested. The package name is unchanged and the trial certificate matches; this is a signature check, not proof of an on-device upgrade. Offline cold start, native SQLite reopen/reboot, keyboard/Android Back, SVG fonts and native picker/share require device acceptance.
+
+High-polymer content is deeper; other organic topics remain introductory. Third-party chemistry review, comprehensive university-exam coverage and long-term learning effectiveness are not verified. No future background execution after this conversation is promised.
 
 ## Confirmed decisions
 
-- First target: university-entrance organic chemistry + polymers, from foundations toward advanced reasoning. Keep the engine subject-independent.
-- Course and Free are equal primary routes. No hard locks; missing prerequisites generate advice.
-- Free defaults ON. OFF leaves no history, mastery, weakness, review or course changes; explicit bookmarks may persist.
-- Unknown is separate from distractor errors. Preserve first recall after hints; infer no distractor-specific misconception from unknown.
-- Prior learning uses approximately 3–5 questions. Self-report/short checks do not permanently certify an entire unit as mastered.
-- Offline core on a smartphone; content and learner data separate. Online AI/sync are optional future layers.
-- The assistant authors dedicated native packs with answers, explanations, hints, knowledge mapping, misconceptions and provenance. No direct arbitrary PDF/web import, runtime AI packaging or pack code execution.
-- README describes the project; STATUS alone records its current position. Details: PRODUCT_SPEC, ARCHITECTURE, CONTENT_PACK_SPEC and LEARNING_ENGINE.
+Course and Free are equal primary routes, prerequisite advice never locks content, recording OFF is ephemeral, unknown never acquires an imagined distractor error, and short prior-learning checks do not permanently certify mastery. The assistant authors and validates dedicated native packs; arbitrary external content and code are not executed.
 
-## Concrete remaining work
-
-1. On Pixel 9a, install the APK and enable airplane mode before first launch. Test ON/OFF sessions, force-close/reopen, reboot, keyboard, Android Back, JSON picker and backup share/restore. Record failures before claiming device acceptance.
-2. Independently review chemistry. Increase distinct question density per node and add substantially more worked structure determination, synthesis and quantitative integration. Topic coverage does not establish advanced-exam sufficiency.
-3. Evaluate the provisional learning model with real usage. Scores are not calibrated probabilities; response time is collected but not penalized. Some nodes cannot reach mastery with the current distinct-question count.
-4. Implement controlled ID retirement/migration before removing nodes in pack updates. Rich molecular/math rendering, archive assets, cloud sync and iOS distribution remain future work.
-
-## Approval boundary and next run
-
-The earlier main publication was rejected for insufficient explicit authorization. On 2026-10-06 JST, the user explicitly authorized it and requested a retry. PR #1 was marked ready and merged using the verified expected head. Post-merge comparison found no file differences from the reviewed branch head. The only changes in this integration run are status bookkeeping; the previous automated/build evidence and outstanding real-device/content gates remain as recorded above. The main-integration approval blocker is resolved.
-
-Read README, STATUS and AGENTS first. Reproduce with Node 24, Java 17, SDK/Build Tools 36, NDK 27.1.12297006 and CMake 3.22.1. Run `npm ci`, `npm run typecheck`, `npm run validate:content`, `npm test`, `npm run export:web`, then with ANDROID_HOME set, `npm run build:android` and `python scripts/inspect-apk.py`.
-
-`scripts/qa-web.cjs` uses Playwright from the primary runtime or a local install; STUDY_CHROME_PATH can select a browser. The host-only Japanese font is not an app dependency. Build-cache/proxy repairs are recorded in RELEASE_VALIDATION and are not app services.
-
-Routine internal implementation and verification remain delegated. Keep project state in this repository, without competing status files or broad personal memories. Never claim a build, remote checkpoint, device test or completed curriculum without evidence.
+Source scope and fact-checking: [POLYMER_CONTENT.md](docs/POLYMER_CONTENT.md).
+Validation: [RELEASE_VALIDATION.md](docs/RELEASE_VALIDATION.md).
+Use: [USER_GUIDE.md](docs/USER_GUIDE.md).
+Execution contract: [AUTONOMOUS_RUN.md](docs/AUTONOMOUS_RUN.md).

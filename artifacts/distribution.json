@@ -1,0 +1,16 @@
+{
+  "file": "kanahebi-study-0.2.0-android.zip",
+  "bytes": 15886438,
+  "sha256": "5f6dabe2e943f2e0035470303fa6fec165c7d6f7ad60e9fa96aaabfbbb2a5f74",
+  "apk": "kanahebi-study-0.2.0-arm64.apk",
+  "apkSha256": "41e425317975ed5f5e844ba436604d9f60d58fc8c759c7dcb10d6ac6563bf090",
+  "entries": [
+    "kanahebi-study-0.2.0-arm64.apk",
+    "START_HERE.txt",
+    "VERIFICATION.json"
+  ],
+  "zipIntegrity": "passed",
+  "deviceExecutionTested": false,
+  "buildRunId": 37394795361,
+  "sourceCommit": "b6a6b62dc222ce7940e7bedadb623afa750bcd48"
+}
