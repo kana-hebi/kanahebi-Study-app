@@ -11,3 +11,6 @@ local.properties
 coverage/
 artifacts/*.apk
 artifacts/*.zip
+
+__pycache__/
+*.pyc

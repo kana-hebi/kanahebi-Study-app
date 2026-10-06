@@ -1,0 +1,93 @@
+{
+  "manifest": {
+    "packId": "jp.exam.chemistry.organic-polymer",
+    "packVersion": "0.1.0",
+    "schemaVersion": 1,
+    "title": "大学受験 有機化学・高分子",
+    "subject": "chemistry",
+    "publisher": "kanahebi-study-app",
+    "language": "ja-JP",
+    "requiredCapabilities": [
+      "question.multipleChoice.v1",
+      "question.textInput.v1",
+      "question.numericInput.v1",
+      "render.chemFormula.v1",
+      "view.reactionMap.v1"
+    ],
+    "description": "全領域の導入教材とオリジナル確認問題。基礎〜総合の初版。難関大演習の十分な問題密度・第三者校閲は今後の課題。"
+  },
+  "units": [
+    {
+      "id": "jp.exam.chemistry.organic-polymer.unit.foundations",
+      "title": "基礎：構造を読む",
+      "stage": 0,
+      "summary": "結合・構造式・官能基・異性体を一つずつ確認する"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "jp.exam.chemistry.organic-polymer.node.valence",
+      "unitId": "jp.exam.chemistry.organic-polymer.unit.foundations",
+      "title": "通常の原子価",
+      "dimension": "knowledge",
+      "prerequisites": [],
+      "lesson": {
+        "core": "中性の代表的な有機分子ではCは4、Hは1、Oは2、Nは3の結合をつくる。二重結合は2本分として数える。",
+        "example": "CH4ではCのまわりにC−Hが4本ある。",
+        "caution": "アンモニウムイオンのNなど、電荷をもつ例外を中性分子の規則に押し込めない。"
+      }
+    }
+  ],
+  "questions": [
+    {
+      "id": "jp.exam.chemistry.organic-polymer.q.valence.choice",
+      "kind": "choice",
+      "prompt": "中性のメタンCH4の炭素の結合の数は？",
+      "choices": [
+        {
+          "id": "b",
+          "text": "2",
+          "misconception": "jp.exam.chemistry.organic-polymer.misconception.valence.b",
+          "feedback": "「2」を選ぶ前に確認：アンモニウムイオンのNなど、電荷をもつ例外を中性分子の規則に押し込めない。"
+        },
+        {
+          "id": "a",
+          "text": "4",
+          "feedback": "C−H単結合4本で炭素の通常の原子価4を満たす。"
+        },
+        {
+          "id": "c",
+          "text": "3",
+          "misconception": "jp.exam.chemistry.organic-polymer.misconception.valence.c",
+          "feedback": "この問題の条件に合わせて考えると、C−H単結合4本で炭素の通常の原子価4を満たす。"
+        }
+      ],
+      "answer": "a",
+      "nodeIds": [
+        "jp.exam.chemistry.organic-polymer.node.valence"
+      ],
+      "difficulty": 1,
+      "hints": [
+        "まず「通常の原子価」で注目する構造・条件を整理しよう。",
+        "中性の代表的な有機分子ではCは4、Hは1、Oは2、Nは3の結合をつくる。二重結合は2本分として数える。",
+        "具体例：CH4ではCのまわりにC−Hが4本ある。"
+      ],
+      "explanation": "C−H単結合4本で炭素の通常の原子価4を満たす。\n\n考え方：中性の代表的な有機分子ではCは4、Hは1、Oは2、Nは3の結合をつくる。二重結合は2本分として数える。\n注意：アンモニウムイオンのNなど、電荷をもつ例外を中性分子の規則に押し込めない。",
+      "sourceId": "original"
+    }
+  ],
+  "reactions": [],
+  "sources": [
+    {
+      "id": "original",
+      "title": "プロジェクト独自作成問題",
+      "use": "本プロジェクトのために新規作成。既存入試問題の本文・図版は複製しない。"
+    },
+    {
+      "id": "mext",
+      "title": "高等学校学習指導要領解説 理科編・理数編",
+      "url": "https://www.mext.go.jp/component/a_menu/education/micro_detail/__icsFiles/afieldfile/2019/11/22/1407073_06_1_2.pdf",
+      "use": "対象領域・学習目標の確認。本文は再配布しない。"
+    }
+  ]
+}

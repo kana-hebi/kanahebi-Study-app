@@ -4,9 +4,13 @@ Last updated: 2026-10-06 JST / 2026-10-05 UTC
 
 ## Current phase
 
-**Polymer content enrichment and offline rich lesson/diagram rendering in progress. Previous v0.1.0 checks are historical; the new revision is not yet verified.**
+**Polymer v0.2.0 source/content implemented; automated checks and browser rendering verified. Android rebuild and final integration are in progress.**
 
-Current user request (2026-10-06 JST): replace shallow polymer explanations with source-grounded deeper instruction, many exercises and diagrams. Run plan: inspect gaps; consult primary educational/manufacturer sources; author detailed polymer lessons, worked examples, distinct questions and exact offline diagrams; preserve existing IDs/history; validate schema and chemistry calculations; verify phone-width rendering and native build; persist source/content and deliver the updated package. Research facts inform original writing and exercises; third-party text, figures and exam questions are not bulk-republished.
+Current user request (2026-10-06 JST): replace shallow polymer explanations with source-grounded deeper instruction, many exercises and diagrams. Implemented: 40 deep lessons, 40 worked examples, 180 new exercises, 44 exact vector diagrams (29 instructional / 15 neutral exercise variants). Source pack totals are 13 units / 123 nodes / 365 questions / 27 reactions. All prior 114 node IDs and 185 grading contracts remain stable.
+
+Verified for this revision: TypeScript and content validation; 20 core tests (including all 56 new numeric answers independently computed and legacy SQL update preservation); Web export; 13 phone-width UI scenarios with zero page errors; all 44 drawings / 264 text elements checked for glyph clipping. The diagram check prompted a correction to PET/nylon bond labels. Native APK rebuild/inspection and remote completion remain pending; v0.1.0 evidence below is historical.
+
+Research facts inform original instruction, diagrams and exercises; external text, figures and exam questions are not bulk-republished. See [POLYMER_CONTENT.md](docs/POLYMER_CONTENT.md). Runtime source changes are complete and the following work is verification/distribution.
 
 GitHub `main` is the canonical project storage and now contains the implementation, content and documents. The original release run began with `main` at `f97fae8`, containing five design documents and no app code. That run produced the app, original content, validation tools and a standalone Android APK.
 

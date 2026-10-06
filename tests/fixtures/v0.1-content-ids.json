@@ -1,0 +1,1056 @@
+{
+  "nodes": [
+    "jp.exam.chemistry.organic-polymer.node.valence",
+    "jp.exam.chemistry.organic-polymer.node.bond",
+    "jp.exam.chemistry.organic-polymer.node.formula",
+    "jp.exam.chemistry.organic-polymer.node.condensed",
+    "jp.exam.chemistry.organic-polymer.node.carbon-class",
+    "jp.exam.chemistry.organic-polymer.node.hydroxyl",
+    "jp.exam.chemistry.organic-polymer.node.ether-group",
+    "jp.exam.chemistry.organic-polymer.node.carbonyl-group",
+    "jp.exam.chemistry.organic-polymer.node.carboxyl-group",
+    "jp.exam.chemistry.organic-polymer.node.amino-group",
+    "jp.exam.chemistry.organic-polymer.node.isomer",
+    "jp.exam.chemistry.organic-polymer.node.geometric",
+    "jp.exam.chemistry.organic-polymer.node.chiral",
+    "jp.exam.chemistry.organic-polymer.node.naming",
+    "jp.exam.chemistry.organic-polymer.node.mole",
+    "jp.exam.chemistry.organic-polymer.node.combustion",
+    "jp.exam.chemistry.organic-polymer.node.elemental",
+    "jp.exam.chemistry.organic-polymer.node.empirical",
+    "jp.exam.chemistry.organic-polymer.node.unsaturation",
+    "jp.exam.chemistry.organic-polymer.node.alkane",
+    "jp.exam.chemistry.organic-polymer.node.substitution",
+    "jp.exam.chemistry.organic-polymer.node.alkene",
+    "jp.exam.chemistry.organic-polymer.node.bromine",
+    "jp.exam.chemistry.organic-polymer.node.hydrogenation",
+    "jp.exam.chemistry.organic-polymer.node.hydration",
+    "jp.exam.chemistry.organic-polymer.node.alkyne",
+    "jp.exam.chemistry.organic-polymer.node.acetylene-prep",
+    "jp.exam.chemistry.organic-polymer.node.acetylene-water",
+    "jp.exam.chemistry.organic-polymer.node.cycloalkane",
+    "jp.exam.chemistry.organic-polymer.node.alcohol-class",
+    "jp.exam.chemistry.organic-polymer.node.primary-oxidation",
+    "jp.exam.chemistry.organic-polymer.node.secondary-oxidation",
+    "jp.exam.chemistry.organic-polymer.node.dehydration-intra",
+    "jp.exam.chemistry.organic-polymer.node.dehydration-inter",
+    "jp.exam.chemistry.organic-polymer.node.alcohol-sodium",
+    "jp.exam.chemistry.organic-polymer.node.alcohol-property",
+    "jp.exam.chemistry.organic-polymer.node.methanol",
+    "jp.exam.chemistry.organic-polymer.node.aldehyde",
+    "jp.exam.chemistry.organic-polymer.node.silver",
+    "jp.exam.chemistry.organic-polymer.node.fehling",
+    "jp.exam.chemistry.organic-polymer.node.iodoform",
+    "jp.exam.chemistry.organic-polymer.node.iodoform-product",
+    "jp.exam.chemistry.organic-polymer.node.formic",
+    "jp.exam.chemistry.organic-polymer.node.ketone",
+    "jp.exam.chemistry.organic-polymer.node.acid-property",
+    "jp.exam.chemistry.organic-polymer.node.esterification",
+    "jp.exam.chemistry.organic-polymer.node.hydrolysis",
+    "jp.exam.chemistry.organic-polymer.node.saponification",
+    "jp.exam.chemistry.organic-polymer.node.dicarboxylic",
+    "jp.exam.chemistry.organic-polymer.node.maleic",
+    "jp.exam.chemistry.organic-polymer.node.benzene",
+    "jp.exam.chemistry.organic-polymer.node.benzene-substitution",
+    "jp.exam.chemistry.organic-polymer.node.nitration",
+    "jp.exam.chemistry.organic-polymer.node.nitro-reduction",
+    "jp.exam.chemistry.organic-polymer.node.aniline-base",
+    "jp.exam.chemistry.organic-polymer.node.diazotization",
+    "jp.exam.chemistry.organic-polymer.node.coupling",
+    "jp.exam.chemistry.organic-polymer.node.diazo-hydrolysis",
+    "jp.exam.chemistry.organic-polymer.node.phenol-acid",
+    "jp.exam.chemistry.organic-polymer.node.phenol-detection",
+    "jp.exam.chemistry.organic-polymer.node.toluene-oxidation",
+    "jp.exam.chemistry.organic-polymer.node.xylene",
+    "jp.exam.chemistry.organic-polymer.node.salicylic",
+    "jp.exam.chemistry.organic-polymer.node.aspirin",
+    "jp.exam.chemistry.organic-polymer.node.separation",
+    "jp.exam.chemistry.organic-polymer.node.fat-structure",
+    "jp.exam.chemistry.organic-polymer.node.unsaturated-fat",
+    "jp.exam.chemistry.organic-polymer.node.soap",
+    "jp.exam.chemistry.organic-polymer.node.hard-water",
+    "jp.exam.chemistry.organic-polymer.node.glucose",
+    "jp.exam.chemistry.organic-polymer.node.fructose",
+    "jp.exam.chemistry.organic-polymer.node.sucrose",
+    "jp.exam.chemistry.organic-polymer.node.maltose",
+    "jp.exam.chemistry.organic-polymer.node.starch",
+    "jp.exam.chemistry.organic-polymer.node.iodine-starch",
+    "jp.exam.chemistry.organic-polymer.node.cellulose",
+    "jp.exam.chemistry.organic-polymer.node.fermentation",
+    "jp.exam.chemistry.organic-polymer.node.amino-acid",
+    "jp.exam.chemistry.organic-polymer.node.isoelectric",
+    "jp.exam.chemistry.organic-polymer.node.peptide",
+    "jp.exam.chemistry.organic-polymer.node.peptide-order",
+    "jp.exam.chemistry.organic-polymer.node.biuret",
+    "jp.exam.chemistry.organic-polymer.node.protein-detection",
+    "jp.exam.chemistry.organic-polymer.node.denaturation",
+    "jp.exam.chemistry.organic-polymer.node.nucleotide",
+    "jp.exam.chemistry.organic-polymer.node.addition-polymer",
+    "jp.exam.chemistry.organic-polymer.node.condensation-polymer",
+    "jp.exam.chemistry.organic-polymer.node.pe",
+    "jp.exam.chemistry.organic-polymer.node.pvc",
+    "jp.exam.chemistry.organic-polymer.node.ps",
+    "jp.exam.chemistry.organic-polymer.node.pet",
+    "jp.exam.chemistry.organic-polymer.node.nylon66",
+    "jp.exam.chemistry.organic-polymer.node.nylon6",
+    "jp.exam.chemistry.organic-polymer.node.phenolic",
+    "jp.exam.chemistry.organic-polymer.node.urea",
+    "jp.exam.chemistry.organic-polymer.node.thermo",
+    "jp.exam.chemistry.organic-polymer.node.rubber",
+    "jp.exam.chemistry.organic-polymer.node.copolymer",
+    "jp.exam.chemistry.organic-polymer.node.ion-exchange",
+    "jp.exam.chemistry.organic-polymer.node.polymer-degree",
+    "jp.exam.chemistry.organic-polymer.node.biodegradable",
+    "jp.exam.chemistry.organic-polymer.node.rayon",
+    "jp.exam.chemistry.organic-polymer.node.acetate",
+    "jp.exam.chemistry.organic-polymer.node.vinylon",
+    "jp.exam.chemistry.organic-polymer.node.acrylic",
+    "jp.exam.chemistry.organic-polymer.node.natural-fiber",
+    "jp.exam.chemistry.organic-polymer.node.structure-process",
+    "jp.exam.chemistry.organic-polymer.node.reverse-oxidation",
+    "jp.exam.chemistry.organic-polymer.node.ester-identification",
+    "jp.exam.chemistry.organic-polymer.node.isomer-count",
+    "jp.exam.chemistry.organic-polymer.node.route",
+    "jp.exam.chemistry.organic-polymer.node.limiting",
+    "jp.exam.chemistry.organic-polymer.node.finite-chain",
+    "jp.exam.chemistry.organic-polymer.node.observations"
+  ],
+  "questions": {
+    "jp.exam.chemistry.organic-polymer.q.valence.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.bond.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.formula.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.condensed.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.condensed.recall": {
+      "kind": "text",
+      "answer": "C2H4O2",
+      "aliases": [
+        "C₂H₄O₂"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.carbon-class.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydroxyl.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydroxyl.recall": {
+      "kind": "text",
+      "answer": "ヒドロキシ基",
+      "aliases": [
+        "水酸基",
+        "ヒドロキシ基"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.ether-group.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.ether-group.recall": {
+      "kind": "text",
+      "answer": "エーテル",
+      "aliases": [
+        "エーテル類"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.carbonyl-group.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.carbonyl-group.recall": {
+      "kind": "text",
+      "answer": "ケトン",
+      "aliases": [
+        "ケトン類"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.carboxyl-group.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.carboxyl-group.recall": {
+      "kind": "text",
+      "answer": "エステル",
+      "aliases": [
+        "エステル類"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.amino-group.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.amino-group.recall": {
+      "kind": "text",
+      "answer": "アミノ基",
+      "aliases": [
+        "アミノ基"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.isomer.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.isomer.recall": {
+      "kind": "text",
+      "answer": "構造異性体",
+      "aliases": [
+        "構造異性体"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.geometric.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.chiral.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.naming.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.naming.recall": {
+      "kind": "text",
+      "answer": "ブタン",
+      "aliases": [
+        "n-ブタン",
+        "ノルマルブタン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.mole.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.combustion.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.elemental.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.empirical.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.empirical.recall": {
+      "kind": "text",
+      "answer": "C6H12O6",
+      "aliases": [
+        "C₆H₁₂O₆"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.unsaturation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.alkane.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.substitution.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.substitution.recall": {
+      "kind": "text",
+      "answer": "置換反応",
+      "aliases": [
+        "置換"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.alkene.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.bromine.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydrogenation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydrogenation.recall": {
+      "kind": "text",
+      "answer": "エタン",
+      "aliases": [
+        "C2H6"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydration.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydration.recall": {
+      "kind": "text",
+      "answer": "エタノール",
+      "aliases": [
+        "エチルアルコール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.alkyne.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetylene-prep.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetylene-prep.recall": {
+      "kind": "text",
+      "answer": "CaC2",
+      "aliases": [
+        "炭化カルシウム",
+        "カーバイド"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetylene-water.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetylene-water.recall": {
+      "kind": "text",
+      "answer": "アセトアルデヒド",
+      "aliases": [
+        "エタナール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.cycloalkane.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.cycloalkane.recall": {
+      "kind": "text",
+      "answer": "C6H12",
+      "aliases": [
+        "C₆H₁₂"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.alcohol-class.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.primary-oxidation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.primary-oxidation.recall": {
+      "kind": "text",
+      "answer": "アセトアルデヒド",
+      "aliases": [
+        "エタナール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.secondary-oxidation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.secondary-oxidation.recall": {
+      "kind": "text",
+      "answer": "アセトン",
+      "aliases": [
+        "プロパノン",
+        "ジメチルケトン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.dehydration-intra.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.dehydration-intra.recall": {
+      "kind": "text",
+      "answer": "エチレン",
+      "aliases": [
+        "エテン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.dehydration-inter.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.dehydration-inter.recall": {
+      "kind": "text",
+      "answer": "ジエチルエーテル",
+      "aliases": [
+        "エトキシエタン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.alcohol-sodium.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.alcohol-property.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.methanol.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.methanol.recall": {
+      "kind": "text",
+      "answer": "ホルムアルデヒド",
+      "aliases": [
+        "メタナール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.aldehyde.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.aldehyde.recall": {
+      "kind": "text",
+      "answer": "酸化される",
+      "aliases": [
+        "酸化"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.silver.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.silver.recall": {
+      "kind": "text",
+      "answer": "Ag",
+      "aliases": [
+        "銀",
+        "金属銀"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.fehling.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.fehling.recall": {
+      "kind": "text",
+      "answer": "Cu2O",
+      "aliases": [
+        "酸化銅(I)",
+        "酸化銅(Ⅰ)",
+        "酸化銅一"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.iodoform.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.iodoform-product.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.iodoform-product.recall": {
+      "kind": "text",
+      "answer": "CHI3",
+      "aliases": [
+        "CHI₃"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.formic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.formic.recall": {
+      "kind": "text",
+      "answer": "ギ酸",
+      "aliases": [
+        "メタン酸"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.ketone.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acid-property.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acid-property.recall": {
+      "kind": "text",
+      "answer": "CO2",
+      "aliases": [
+        "二酸化炭素"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.esterification.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.esterification.recall": {
+      "kind": "text",
+      "answer": "酢酸エチル",
+      "aliases": [
+        "エタン酸エチル"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydrolysis.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hydrolysis.recall": {
+      "kind": "text",
+      "answer": "メタノール",
+      "aliases": [
+        "メチルアルコール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.saponification.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.saponification.recall": {
+      "kind": "text",
+      "answer": "酢酸ナトリウム",
+      "aliases": [
+        "CH3COONa"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.dicarboxylic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.maleic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.maleic.recall": {
+      "kind": "text",
+      "answer": "マレイン酸",
+      "aliases": [
+        "cis-ブテン二酸"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.benzene.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.benzene.recall": {
+      "kind": "text",
+      "answer": "C6H6",
+      "aliases": [
+        "C₆H₆"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.benzene-substitution.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.benzene-substitution.recall": {
+      "kind": "text",
+      "answer": "クロロベンゼン",
+      "aliases": [
+        "C6H5Cl"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.nitration.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nitration.recall": {
+      "kind": "text",
+      "answer": "ニトロベンゼン",
+      "aliases": [
+        "C6H5NO2"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.nitro-reduction.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nitro-reduction.recall": {
+      "kind": "text",
+      "answer": "アニリン",
+      "aliases": [
+        "アミノベンゼン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.aniline-base.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.diazotization.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.coupling.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.diazo-hydrolysis.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.diazo-hydrolysis.recall": {
+      "kind": "text",
+      "answer": "N2",
+      "aliases": [
+        "窒素"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.phenol-acid.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.phenol-detection.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.toluene-oxidation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.toluene-oxidation.recall": {
+      "kind": "text",
+      "answer": "安息香酸",
+      "aliases": [
+        "ベンゼンカルボン酸"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.xylene.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.xylene.recall": {
+      "kind": "text",
+      "answer": "p-キシレン",
+      "aliases": [
+        "パラキシレン",
+        "pキシレン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.salicylic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.salicylic.recall": {
+      "kind": "text",
+      "answer": "サリチル酸メチル",
+      "aliases": [
+        "サリチル酸メチル"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.aspirin.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.separation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.fat-structure.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.unsaturated-fat.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.soap.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.hard-water.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.glucose.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.fructose.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.sucrose.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.maltose.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.starch.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.starch.recall": {
+      "kind": "text",
+      "answer": "グルコース",
+      "aliases": [
+        "ブドウ糖"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.iodine-starch.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.cellulose.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.fermentation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.amino-acid.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.isoelectric.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.peptide.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.peptide-order.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.biuret.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.protein-detection.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.denaturation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nucleotide.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.addition-polymer.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.addition-polymer.recall": {
+      "kind": "text",
+      "answer": "付加重合",
+      "aliases": [
+        "付加重合"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.condensation-polymer.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.condensation-polymer.recall": {
+      "kind": "text",
+      "answer": "縮合重合",
+      "aliases": [
+        "縮合重合"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.pe.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.pe.recall": {
+      "kind": "text",
+      "answer": "プロペン",
+      "aliases": [
+        "プロピレン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.pvc.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.pvc.recall": {
+      "kind": "text",
+      "answer": "塩化ビニル",
+      "aliases": [
+        "クロロエテン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.ps.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.ps.recall": {
+      "kind": "text",
+      "answer": "スチレン",
+      "aliases": [
+        "ビニルベンゼン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.pet.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nylon66.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nylon66.recall": {
+      "kind": "text",
+      "answer": "アミド結合",
+      "aliases": [
+        "−CO−NH−",
+        "ポリアミド結合"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.nylon6.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.nylon6.recall": {
+      "kind": "text",
+      "answer": "ナイロン6",
+      "aliases": [
+        "ポリアミド6"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.phenolic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.urea.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.urea.recall": {
+      "kind": "text",
+      "answer": "ホルムアルデヒド",
+      "aliases": [
+        "メタナール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.thermo.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.rubber.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.rubber.recall": {
+      "kind": "text",
+      "answer": "イソプレン",
+      "aliases": [
+        "2-メチル-1,3-ブタジエン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.copolymer.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.ion-exchange.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.polymer-degree.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.biodegradable.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.rayon.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.rayon.recall": {
+      "kind": "text",
+      "answer": "再生繊維",
+      "aliases": [
+        "再生"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetate.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetate.recall": {
+      "kind": "text",
+      "answer": "半合成繊維",
+      "aliases": [
+        "半合成"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.vinylon.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.vinylon.recall": {
+      "kind": "text",
+      "answer": "酢酸ビニル",
+      "aliases": [
+        "ビニルアセタート"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.acrylic.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.acrylic.recall": {
+      "kind": "text",
+      "answer": "アクリロニトリル",
+      "aliases": [
+        "CH2=CHCN"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.natural-fiber.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.natural-fiber.recall": {
+      "kind": "text",
+      "answer": "タンパク質",
+      "aliases": [
+        "蛋白質"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.structure-process.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.structure-process.recall": {
+      "kind": "text",
+      "answer": "2-ブタノン",
+      "aliases": [
+        "ブタン-2-オン",
+        "メチルエチルケトン"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.reverse-oxidation.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.reverse-oxidation.recall": {
+      "kind": "text",
+      "answer": "2-ブタノール",
+      "aliases": [
+        "ブタン-2-オール"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.ester-identification.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.ester-identification.recall": {
+      "kind": "text",
+      "answer": "酢酸プロピル",
+      "aliases": [
+        "酢酸n-プロピル",
+        "エタン酸プロピル"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.isomer-count.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.route.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.route.recall": {
+      "kind": "text",
+      "answer": "還元",
+      "aliases": [
+        "還元反応"
+      ]
+    },
+    "jp.exam.chemistry.organic-polymer.q.limiting.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.finite-chain.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.observations.choice": {
+      "kind": "choice",
+      "answer": "a"
+    },
+    "jp.exam.chemistry.organic-polymer.q.mole-ethanol": {
+      "kind": "numeric",
+      "answer": 0.1,
+      "tolerance": 0.0001
+    },
+    "jp.exam.chemistry.organic-polymer.q.combustion-gas": {
+      "kind": "numeric",
+      "answer": 4.48,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.elemental-carbon": {
+      "kind": "numeric",
+      "answer": 0.24,
+      "tolerance": 0.001
+    },
+    "jp.exam.chemistry.organic-polymer.q.elemental-hydrogen": {
+      "kind": "numeric",
+      "answer": 0.06,
+      "tolerance": 0.001
+    },
+    "jp.exam.chemistry.organic-polymer.q.sodium-gas": {
+      "kind": "numeric",
+      "answer": 1.12,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.ester-yield": {
+      "kind": "numeric",
+      "answer": 6.6,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.peptide-water": {
+      "kind": "numeric",
+      "answer": 5,
+      "tolerance": 0
+    },
+    "jp.exam.chemistry.organic-polymer.q.fat-base": {
+      "kind": "numeric",
+      "answer": 2.4,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.fermentation-mass": {
+      "kind": "numeric",
+      "answer": 4.6,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.starch-hydrolysis": {
+      "kind": "numeric",
+      "answer": 9.0,
+      "tolerance": 0.01
+    },
+    "jp.exam.chemistry.organic-polymer.q.pe-degree": {
+      "kind": "numeric",
+      "answer": 2000,
+      "tolerance": 0
+    },
+    "jp.exam.chemistry.organic-polymer.q.pet-unit-mass": {
+      "kind": "numeric",
+      "answer": 192,
+      "tolerance": 0
+    },
+    "jp.exam.chemistry.organic-polymer.q.acetate-mass": {
+      "kind": "numeric",
+      "answer": 288,
+      "tolerance": 0
+    },
+    "jp.exam.chemistry.organic-polymer.q.finite-pet-water": {
+      "kind": "numeric",
+      "answer": 19,
+      "tolerance": 0
+    }
+  }
+}

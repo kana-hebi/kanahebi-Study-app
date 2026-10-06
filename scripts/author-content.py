@@ -218,3 +218,8 @@ math=dict(manifest=dict(packId=M,packVersion='0.1.0',schemaVersion=1,title='拡�
  reactions=[],sources=[dict(id='original',title='拡張検証用オリジナル問題',use='本プロジェクトが新規作成')])
 (out/'math-check.study-pack.json').write_text(json.dumps(math,ensure_ascii=False,indent=2)+'\n')
 print(f'Organic/polymer: {len(units)} units, {len(nodes)} knowledge nodes, {len(questions)} questions, {len(reactions)} reactions')
+
+# Deep polymer additions are reproducible; importing packs never executes this authoring code.
+import subprocess, sys
+from pathlib import Path
+subprocess.run([sys.executable, str(Path(__file__).resolve().parent / "enrich-polymers.py")], check=True)

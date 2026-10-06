@@ -1,8 +1,13 @@
 {
-  "date": "2026-10-05T17:16:41.535Z",
+  "date": "2026-10-05T23:54:30.077Z",
   "viewport": "412x892",
   "tests": [
     "mobile home renders with all content available",
+    "rich lesson renders diagram, hides then opens worked solution and zooms without learner writes",
+    "related lesson navigation connects polymer instruction",
+    "full lesson text search opens PMMA; vector and layout fit 320-pixel phone width",
+    "home polymer exercise route includes all 40 deep topics across synthetic and natural units",
+    "new polymer question renders neutral exercise diagram, grades and explains with recording OFF",
     "OFF session unknown/hints/reveal/exit leaves storage byte-identical",
     "tracked first unknown remains unknown after hint-assisted success",
     "reload preserves tracked learner data",

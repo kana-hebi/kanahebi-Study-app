@@ -9,7 +9,28 @@ The current importer accepts a single UTF-8 JSON file containing `manifest`, `un
 
 Required manifest fields are `packId`, `packVersion`, `schemaVersion: 1`, `title`, `subject`, `publisher`, `language`, `description` and `requiredCapabilities`. Unit, node, question and reaction IDs begin with `packId + '.'`. References and an acyclic prerequisite graph are mandatory. Every question needs at least two hints, an explanation and a valid source ID. Limits and update rules are described in [LEARNING_ENGINE.md](LEARNING_ENGINE.md).
 
-Currently supported capabilities are `question.multipleChoice.v1`, `question.textInput.v1`, `question.numericInput.v1`, `render.chemFormula.v1` and `view.reactionMap.v1`. Chemical formulas are Unicode/condensed text, not a molecular graph editor. KaTeX, arbitrary images, archive assets, optional-capability fallback, pack dependencies and ID migration are not implemented. Unknown required capabilities are rejected. Existing node deletion is rejected until a migration feature exists.
+Currently supported capabilities are `question.multipleChoice.v1`, `question.textInput.v1`, `question.numericInput.v1`, `render.chemFormula.v1`, `view.reactionMap.v1`, `render.lessonBlocks.v1` and `render.vectorDiagram.v1`. Chemical formulas use Unicode/condensed text and original bounded vector drawings. KaTeX, arbitrary image/HTML/SVG imports, archive assets, optional-capability fallback, pack dependencies and ID migration are not implemented. Unknown required capabilities are rejected. Existing node deletion is rejected until a migration feature exists.
+
+### Rich lessons and diagrams in app v0.2.0
+
+Schema remains v1: legacy packs containing only `lesson.core`, `example`, `caution` still work. New optional fields are:
+
+| Location | Field | Contract |
+|---|---|---|
+| `node.lesson` | `goals` | 1–8 nonempty learning-goal strings |
+| `node.lesson` | `blocks` | 1–40 paragraph, table, worked-example or diagram blocks; declares `render.lessonBlocks.v1` |
+| `node.lesson` | `sourceIds` | Nonempty, unique, existing source IDs |
+| `node.lesson` | `relatedNodeIds` | Up to 8 existing other knowledge IDs |
+| `question` | `diagramId`, `sourceIds`, `explanationBlocks` | Validated diagram/source/block references; explanations are displayed after answering or revealing |
+| `pack` | `diagrams` | Up to 500 drawings, namespaced unique IDs; declares `render.vectorDiagram.v1` |
+
+Paragraphs contain `heading`, `body`. Tables have a heading, 2–5 column strings and 1–30 rectangular rows. Worked examples contain `heading`, `prompt`, 1–12 `steps`, `answer`, and an optional `diagramId`; the solution opens by explicit learner action. A diagram block contains its `diagramId`.
+
+A drawing contains `id`, `title`, `description`, `width`, `height`, `elements`, `sourceIds`. Width is 240–1200, height 80–1600, and there are 1–200 elements. Allowed elements are text, line, polyline, rect and ellipse. Coordinates are finite and bounded by the drawing; color is one of the six app palette tokens. Text is at most 100 characters, with 12–32 font size and explicit alignment. A polyline contains 2–100 points. Raw SVG paths, scripts, HTML, external assets and evaluated expressions are unsupported. The renderer receives explicit primitives; it never evaluates pack content. The app includes SVG native components and all data, so drawings need no network request.
+
+Text inside tables and worked examples participates in local lesson search. The Free Study “詳しい教材” scope uses the nodes with lesson blocks across existing units; it does not change the pack's subject or curriculum hierarchy. Drawings have a local enlarged modal with vertical/horizontal scrolling.
+
+App v0.1.0 cannot render these two new required capabilities. Upgrade the app before importing the enriched v0.2.0 pack; a required capability is never silently omitted. Existing 114 knowledge IDs and 185 grading contracts remain stable, and pack replacement preserves prior attempts/bookmarks/settings.
 
 ## 1. Purpose
 
